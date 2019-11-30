@@ -21,8 +21,6 @@ class VencimientosController < ApplicationController
   def edit
   end
 
-
-
   # POST /vencimientos
   # POST /vencimientos.json
   def create

@@ -5,7 +5,7 @@ RUN mkdir /myapp
 WORKDIR /myapp
 COPY . .
 # COPY Gemfile.lock /myapp/Gemfile.lock
-RUN bundle install
+RUN bundle update rails
 COPY . /myapp
 
 

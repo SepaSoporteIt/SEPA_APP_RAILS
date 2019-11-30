@@ -50,6 +50,4 @@ gem 'mysql2'
 gem 'blazer'
 
 gem 'travis'
-
-gem 'judge'
 #gem 'whenever', :require => false

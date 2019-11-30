@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   resources :acts
   resources :entities
   resources :vencimientos
-  resources :expirations
+  resources :expirations do
+    member do
+      get 'copy'
+    end
+  end
   resources :localidad_partidos
   resources :studies
   get 'backoffice/index'

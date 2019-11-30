@@ -1,18 +1,26 @@
 class ExpirationsController < ApplicationController
-  before_action :set_expiration, only: [:show, :edit, :update, :destroy]
+  before_action :set_expiration, only: [:show, :edit, :update, :destroy, :copy]
 
   # GET /expirations
   # GET /expirations.json
   
-  def index 
-    #expirationLogic
-    @expirations = Expiration.search(params[:search])
-    @expirations = @expirations.where(status: params[:status]) if params[:status] && %w[vencido vigente].include?(params[:status])
+  def index
+  @expirations = Expiration.search(params[:search])
+  @expirations = @expirations.where(status: params[:status]) if params[:status] && %w[vencido vigente].include?(params[:status])
+  @expirations
+ 
   end
 
   # GET /expirations/1
   # GET /expirations/1.json
   def show
+  end
+      
+  def copy
+  @expirations = Expiration.find(params[:id])
+  #create new object with attributes of existing record 
+  @expiration = Expiration.new(@expirations.attributes) 
+  render "new"
   end
 
   # GET /expirations/new
@@ -22,18 +30,6 @@ class ExpirationsController < ApplicationController
 
   # GET /expirations/1/edit
   def edit
-  end
-
-  def self.expirationLogic
-    @expirations = Expiration.all
-    @expirations.each do |expiration|
-      if (expiration.status == 'Vigente' && Date.today >= (expiration.end_date - 2.month))
-        expiration.update_attribute :status, 'A vencer'
-      end
-      if (expiration.status == 'A vencer' && Date.today >= expiration.end_date)
-        expiration.update_attribute :status, 'Vencido'
-      end
-    end
   end
 
   # POST /expirations

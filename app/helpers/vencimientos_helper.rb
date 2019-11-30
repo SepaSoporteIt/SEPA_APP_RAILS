@@ -9,16 +9,16 @@ module VencimientosHelper
         bgcolors << "#d83200"
     when "Vigente Sin fecha"
         bgcolors << "#1378a9"
-
     when "Vigente"
         bgcolors << "#aad37b"
     when "Pendiente"
-
         bgcolors << "#90a4ae"
     when "Antiguo"
         bgcolors << "#eaeef0"
     when "A vencer"
         bgcolors << "#ffea00"
+        
+
     end
 
     

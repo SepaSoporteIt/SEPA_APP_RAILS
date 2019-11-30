@@ -67,7 +67,6 @@
       <tr height="100" bgcolor="<%= bgcolor_condition_status(expiration.status)%>"
       style="<%= txtcolor_condition_status(expiration.status)%>";>
       <%if expiration.status == "Vencido" || expiration.status == "Vigente Sin fecha" %>
-
           <td align="center"><%= link_to expiration.company.name + " - " +  expiration.company.addressDirection + " " + expiration.company.addressNumber, expiration.company, {:style=>'color:#ebebeb;'} %></td>
 
           <td align="center"><%= link_to expiration.employee.name + " " + expiration.employee.surname, expiration.employee, {:style=>'color:#ebebeb;'}%></td>
@@ -93,17 +92,13 @@
             <td align="center"><%= link_to expiration.company.name + " - " +  expiration.company.addressDirection + " " + expiration.company.addressNumber, expiration.company %></td>
             <td align="center"><%= link_to expiration.employee.name + " " + expiration.employee.surname, expiration.employee %></td>
             <td align="center"><%= link_to expiration.study.name, expiration.study %></td>
-            <%if expiration.status == "Pendiente" %>
-              <td align="center"><%= expiration.start_date = "  " %></td>
-              <td align="center"><%= expiration.end_date = "  " %></td>
-            <% else %>
-              <td align="center"><%= expiration.start_date  %>
-              <td align="center"><%= expiration.end_date  %>
-            <%end%>
+            <td align="center"><%= expiration.start_date %></td>
+            <td align="center"><%= expiration.end_date %></td>
             <td align="center"><%= expiration.status %></td>
             <td><%= link_to 'Ver Detalles', expiration %></td>
             <td><%= link_to 'Editar', edit_expiration_path(expiration) %></td>
-            <td><%= link_to 'Eliminar', expiration, method: :delete, data: { confirm: 'Esta Ud Seguro?' } %>  
+            <td><%= link_to 'Eliminar', expiration, method: :delete, data: { confirm: 'Esta Ud Seguro?' } %>
+          
         <%end%>
         
 

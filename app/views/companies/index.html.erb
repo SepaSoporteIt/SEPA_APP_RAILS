@@ -72,7 +72,7 @@ $(document).ready( function() {
   <tbody>
     <% @companies.each do |company| %>
       <tr>
-        <td align="center"><%= link_to company.name, company%></td>
+        <td align="center"><%= link_to company.name, company %></td>
         <td align="center"><%= company.fantasy_name %></td>
         <td align="center"><%= company.tlf %></td>
         <td align="center"><%= company.addressDirection+" "+company.addressNumber %></td>
@@ -80,7 +80,6 @@ $(document).ready( function() {
         <td align="center"><%= company.localidad_partido.partido %></td>
         <td align="center"><%= company.suscription ? 'Si':'No'%></td>    
         <td align="right"><%= link_to 'Editar', edit_company_path(company) %></td>
-        
       </tr>
     <% end %>
   </tbody>

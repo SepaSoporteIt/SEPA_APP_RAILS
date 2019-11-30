@@ -92,28 +92,8 @@ if (document.getElementById("expiration_status").value == "Vigente Sin fecha") {
   </div>
 
   <div class="pure-control-group">
-
-
-    <%= label_tag :status, "Estado" %>
-
-    <% case expiration.status %>
-        <% when 'Vigente'%>
-          <%=f.select(:status, options_for_select([['Vigente', 'Vigente'], ['Vencido', 'Vencido'], ['Pendiente', 'Pendiente'], ['A vencer', 'A vencer'], ['Antiguo', 'Antiguo'], ['Sin fecha', 'Sin fecha']]), {}, {:onChange => "hideDate();"}) %>        
-        <% when 'A vencer'%>
-          <%=f.select(:status, options_for_select([['A vencer', 'A vencer'], ['Vigente', 'Vigente'], ['Vencido', 'Vencido'], ['Pendiente', 'Pendiente'], ['Antiguo', 'Antiguo'], ['Sin fecha', 'Sin fecha']]), {}, {:onChange => "hideDate();"}) %>
-        <% when 'Vencido'%>
-          <%=f.select(:status, options_for_select([['Vencido', 'Vencido'], ['Vigente', 'Vigente'], ['Pendiente', 'Pendiente'], ['A vencer', 'A vencer'], ['Antiguo', 'Antiguo'], ['Sin fecha', 'Sin fecha']]), {}, {:onChange => "hideDate();"}) %>
-        <% when 'Pendiente'%>
-          <%=f.select(:status, options_for_select([['Pendiente', 'Pendiente'], ['Vigente', 'Vigente'], ['Vencido', 'Vencido'], ['A vencer', 'A vencer'], ['Antiguo', 'Antiguo'], ['Sin fecha', 'Sin fecha']]), {}, {:onChange => "hideDate();"}) %>
-        <% when 'Antiguo'%>
-          <%=f.select(:status, options_for_select([['Antiguo', 'Antiguo'], ['Vigente', 'Vigente'], ['Vencido', 'Vencido'], ['Pendiente', 'Pendiente'], ['A vencer', 'A vencer'], ['Sin fecha', 'Sin fecha']]), {}, {:onChange => "hideDate();"}) %>
-        <% when 'Sin fecha'%>
-          <%=f.select(:status, options_for_select([['Sin fecha', 'Sin fecha'], ['Vigente', 'Vigente'], ['Vencido', 'Vencido'], ['Pendiente', 'Pendiente'], ['A vencer', 'A vencer'], ['Antiguo', 'Antiguo']]), {}, {:onChange => "hideDate();"}) %>
-        <% else %>
-          <%=f.select(:status, options_for_select([['Vigente', 'Vigente'], ['Vencido', 'Vencido'], ['Pendiente', 'Pendiente'], ['A vencer', 'A vencer'], ['Antiguo', 'Antiguo'], ['Sin fecha', 'Sin fecha']]), {}, {:onChange => "hideDate();"}) %>
-    <% end %>
-
-
+    <%= label_tag :status, "Estado"%>
+    <%= f.select(:status, options_for_select([['Vigente', 'Vigente'], ['Vencido', 'Vencido'], ['Pendiente', 'Pendiente'], ['A vencer', 'A vencer'], ['Antiguo', 'Antiguo'], ['Vigente Sin fecha', 'Vigente Sin fecha']]), {}, {:onChange => "hideDate();"}) %>
   </div>
 
   <div class="pure-control-group">

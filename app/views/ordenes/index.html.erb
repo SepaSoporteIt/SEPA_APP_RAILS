@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Ordenes de Trabajo</h1>
+
+<table class="pure-table pure-table-horizontal">
+  <thead>
+    <tr>
+      <th>Codigo</th>
+      <th>Vencimiento</th>
+      <th>Profesional Asignado</th>
+      <th>Contacto</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ordenes.each do |orden| %>
+      <tr>
+        <td><%= orden.external_id %></td>
+        <td><%= orden.vencimiento %></td>
+        <td><%= Employee.find(orden.contacto_id).name %></td>
+        <td><%= orden.contacto %></td>
+        <td><%= link_to 'Ver Detalle', orden %></td>
+        <td><%= link_to 'Eliminar', orden, method: :delete, data: { confirm: 'Esta ud seguro?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nueva O de Trabajo', new_ordene_path %>

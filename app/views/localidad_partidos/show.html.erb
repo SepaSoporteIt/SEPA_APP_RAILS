@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+<%= link_to 'Editar', edit_localidad_partido_path(@localidad_partido) %> |
+<%= link_to 'Atras', localidad_partidos_path %>
+</br></br> 
+<style> .example-table td {   padding: 3px} </style>
+<table width="100%" class="pure-table pure-table-horizontal" >
+<thead> <tr> <th><strong><em>Info General</em></strong></th></tr></thead>
+<tbody>
+    <tr><td><strong>Localidad:</strong> &ensp;   <%= @localidad_partido.localidad %>
+</td></tr>
+
+    <tr><td><strong>Partido:</strong> &ensp;     <%= @localidad_partido.partido %>
+</td></tr>    
+</tbody>
+</table>

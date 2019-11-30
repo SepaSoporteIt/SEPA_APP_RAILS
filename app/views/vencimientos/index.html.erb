@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Vencimientos</h1>
+
+<%= link_to 'Nuevo Vencimiento', new_vencimiento_path %>
+
+</br>
+<br>
+<table class="pure-table pure-table-horizontal">
+  <thead>
+    <tr>
+      <th align="center">Cliente</th>
+      <th align="center">Profesional</th>
+      <th align="center">Estudio</th>
+      <th align="center">Fecha de Inicio</th>
+      <th align="center">Fecha de Finalizacion</th>
+      <th align="center">Estado</th>
+      <th colspan="3" align="center">Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr><td> </td> </tr>
+    <% @vencimientos.each do |vencimiento| %>
+      <tr bgcolor="<%= bgcolor_condition_status(vencimiento.status)%>"
+      style="<%= txtcolor_condition_status(vencimiento.status)%>";>
+        <td align="center"><%= vencimiento.company_Id %></td>
+        <td align="center"><%= vencimiento.employee_Id %></td>
+        <td align="center"><%= vencimiento.study_Id %></td>
+        <td align="center"><%= vencimiento.start_date %></td>
+        <td align="center"><%= vencimiento.end_date %></td>
+        <td align="center"><%= vencimiento.status %></td>
+        <td><%= link_to 'Ver Detalles', vencimiento %></td>
+        <td><%= link_to 'Editar', edit_vencimiento_path(vencimiento) %></td>
+        <td><%= link_to 'Eliminar', vencimiento, method: :delete, data: { confirm: 'Esta Ud Seguro?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

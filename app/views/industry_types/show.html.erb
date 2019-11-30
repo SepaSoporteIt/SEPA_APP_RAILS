@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<style> .example-table td {   padding: 3px} </style>
+<table width="100%" class="pure-table pure-table-horizontal" >
+<thead> <tr> <th><strong><em>Informacion</em></strong></th></tr></thead>
+<tbody>
+  <tr>
+  <tr>      <td><strong>CIIU:</strong>&nbsp;&nbsp;<%= @industry_type.ciiu %></td></tr>
+
+  <td><strong>Descripcion de la actividad:</strong>&nbsp;&nbsp;<%= @industry_type.name %></td> </tr> 
+    <tr>
+
+
+</tbody>
+</table>
+</br></br>
+<%= link_to 'Editar', edit_industry_type_path(@industry_type) %> |
+<%= link_to 'Regresar al Listado', industry_types_path %>

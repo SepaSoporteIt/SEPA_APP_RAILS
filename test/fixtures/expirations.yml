@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  industry: MyString
+  employee: MyString
+  study: MyString
+  start_date: MyString
+  end_date: MyString
+  status: MyString
+  comments: MyText
+
+two:
+  industry: MyString
+  employee: MyString
+  study: MyString
+  start_date: MyString
+  end_date: MyString
+  status: MyString
+  comments: MyText

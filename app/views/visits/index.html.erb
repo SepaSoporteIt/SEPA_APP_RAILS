@@ -1,0 +1,73 @@
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="/tablefilter.js"></script>
+<script src="/datatables.min.js"></script>
+<script src="/datatables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/datatables.min.css">
+
+<p id="notice"><%= notice %></p>
+
+<h1>Tareas</h1>
+<%= link_to 'Nueva Tarea', new_visit_path %>
+<br/>
+<br/>
+<br/>
+<input type="search" placeholder="Filtrar ...">
+
+<table class="pure-table pure-table-horizontal" id="table1">
+  <thead>
+    <tr>
+      <th>Compañia</th>
+      <th>Tipo de visita</th>
+      <th>Frecuencia de la visita</th>
+      <th>Responsable</th>
+      <th>Fecha de la visita</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @visits.each do |visit| %>
+      <tr>
+        <td><%= Company.find(visit.companyId).name %></td>
+        <td><%= VisitType.find(visit.visitTypeId).name %></td>
+        <td><%= Frecuency.find(visit.frecuencyTypeId).name %></td>
+        <td><%= Employee.find(visit.employeeId).name %></td>
+        <td><%= visit.visitDate %></td>
+        <td><%= link_to 'Ver detalle', visit %></td>
+        <td><%= link_to 'Eliminar', visit, method: :delete%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<script>
+  $( document ).ready(function() {
+    $('#table1').tableFilter({
+
+      // input field to filter table rows
+      'input' : 'input[type=search]',
+
+      // trigger events and elements
+      'trigger': {
+        
+        "event"   : "keyup", 
+        'element'   : undefined 
+      },
+
+      // case sensitive
+      'caseSensitive' :  false,
+      
+      // enable table sort
+      'sort'  : true, 
+
+      // not found element
+      // e.g. notFoundElement : ".not-found"
+      'notFoundElement' : null,
+    });
+  });  
+      $(document).ready( function () {
+        $('#table1').DataTable();
+    } );
+</script>
+

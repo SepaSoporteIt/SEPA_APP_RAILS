@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Estudios</h1>
+
+<%= link_to 'Nuevo Estudio', new_study_path %>
+</br>
+
+<br>
+<table class="pure-table pure-table-horizontal">
+  <thead>
+    <tr>
+      <th align="center">Nombre</th>
+      <th align="center">Resolucion</th>
+      <th align="center">Legislacion</th>
+      <th colspan="2" align="center">Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @studies.each do |study| %>
+      <tr>
+        <td align="center"><%= study.name %></td>
+        <td align="center"><%= study.resolution %></td>
+        <td align="center"><%= study.legislation %></td>
+        <td align="center"><%= link_to 'Editar', edit_study_path(study) %></td>
+        <td align="center"><%= link_to 'Eliminar', study, method: :destroy, data: { confirm: 'Esta Ud Seguro?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</br>
+
+

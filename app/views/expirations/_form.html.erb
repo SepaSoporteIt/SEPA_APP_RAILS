@@ -1,0 +1,128 @@
+<div>
+    <style scoped>
+
+        .button-success,
+        .button-error,
+        .button-warning,
+        .button-secondary {
+            color: white;
+            border-radius: 4px;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-success {
+            background: rgb(28, 184, 65); /* this is a green */
+        }
+
+        .button-error {
+            background: rgb(255, 255, 0); /* this is a maroon */
+        }
+
+        .button-warning {
+            background: rgb(223, 117, 20); /* this is an orange */
+        }
+
+        .button-secondary {
+            background: rgb(102, 255, 255); /* this is a light blue */
+        }
+
+    </style>
+</div>
+
+
+<script>
+  
+
+function hideDate() {
+
+if (document.getElementById("expiration_status").value == "Vigente Sin fecha") {
+    document.getElementById("fechaCss").style.display = "none"
+  }else{
+
+ document.getElementById("fechaCss").style.display = "block"
+  }
+}
+
+</script>
+
+
+<%= form_for @expiration, :html => {:class => 'pure-form pure-form-aligned'} do |f| %>
+<%= field_set_tag 'Por favor complete los siguientes campos'  %>
+  <% if expiration.errors.any? %>
+    <div id="error_explanation">
+      <% if expiration.errors.count ==1 %>
+      <h2>Se encontro <%= expiration.errors.count%> error en la creacion de este vencimiento</h2>
+      <% else %>
+      <h2>Se encontraron <%= expiration.errors.count%> errores en la creacion de este vencimiento</h2>
+      <% end %>
+      <!-- cambio carteles de error dependiendo de la cantidad de estos mismos !-->
+      <ul>
+      <% expiration.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+  <div class="pure-control-group">
+    <label><%= link_to "Clientes", :controller => 'companies', :action => 'index' %></label>
+    <%= select("expiration", "companyId", Company.all.collect {|c| [ c.name+" - "+c.addressDirection+" "+c.addressNumber , c.id] }.sort, { :prompt => 'Cliente' } , :class => 'pure-input-1-4')%>
+  </div>
+
+  <div class="pure-control-group">
+<label><%= link_to "Profesionales", :controller => 'employees', :action => 'index' %></label>
+    <%= select("expiration", "employeeId", Employee.all.collect {|e| [ e.name+" "+e.surname , e.id] }.sort, {  :prompt => 'Profesional' } , :class => 'pure-input-1-4')%>
+  </div>
+
+  <div class="pure-control-group">
+    <label><%= link_to "Estudio", :controller => 'studies', :action => 'index' %></label>
+    <%= select("expiration", "studyId", Study.all.collect {|s| [ s.name , s.id] }.sort, { :prompt => 'Estudio' } , :class => 'pure-input-1-4')%>
+  </div>
+
+  <div class="pure-control-group">
+    <%= label_tag :start_date, "Fecha de inicio" %>
+    <%= f.date_select :start_date, order: [:day, :month, :year] %>
+  </div>
+
+  <div class="pure-control-group", id = "fechaCss">
+    <%= label_tag :end_date, "Fecha de finalizacion"%>
+    <%= f.date_select :end_date, order: [:day, :month, :year] %>
+  </div>
+
+  <div class="pure-control-group">
+
+
+    <%= label_tag :status, "Estado" %>
+
+    <% case expiration.status %>
+        <% when 'Vigente'%>
+          <%=f.select(:status, options_for_select([['Vigente', 'Vigente'], ['Vencido', 'Vencido'], ['Pendiente', 'Pendiente'], ['A vencer', 'A vencer'], ['Antiguo', 'Antiguo'], ['Sin fecha', 'Sin fecha']]), {}, {:onChange => "hideDate();"}) %>        
+        <% when 'A vencer'%>
+          <%=f.select(:status, options_for_select([['A vencer', 'A vencer'], ['Vigente', 'Vigente'], ['Vencido', 'Vencido'], ['Pendiente', 'Pendiente'], ['Antiguo', 'Antiguo'], ['Sin fecha', 'Sin fecha']]), {}, {:onChange => "hideDate();"}) %>
+        <% when 'Vencido'%>
+          <%=f.select(:status, options_for_select([['Vencido', 'Vencido'], ['Vigente', 'Vigente'], ['Pendiente', 'Pendiente'], ['A vencer', 'A vencer'], ['Antiguo', 'Antiguo'], ['Sin fecha', 'Sin fecha']]), {}, {:onChange => "hideDate();"}) %>
+        <% when 'Pendiente'%>
+          <%=f.select(:status, options_for_select([['Pendiente', 'Pendiente'], ['Vigente', 'Vigente'], ['Vencido', 'Vencido'], ['A vencer', 'A vencer'], ['Antiguo', 'Antiguo'], ['Sin fecha', 'Sin fecha']]), {}, {:onChange => "hideDate();"}) %>
+        <% when 'Antiguo'%>
+          <%=f.select(:status, options_for_select([['Antiguo', 'Antiguo'], ['Vigente', 'Vigente'], ['Vencido', 'Vencido'], ['Pendiente', 'Pendiente'], ['A vencer', 'A vencer'], ['Sin fecha', 'Sin fecha']]), {}, {:onChange => "hideDate();"}) %>
+        <% when 'Sin fecha'%>
+          <%=f.select(:status, options_for_select([['Sin fecha', 'Sin fecha'], ['Vigente', 'Vigente'], ['Vencido', 'Vencido'], ['Pendiente', 'Pendiente'], ['A vencer', 'A vencer'], ['Antiguo', 'Antiguo']]), {}, {:onChange => "hideDate();"}) %>
+        <% else %>
+          <%=f.select(:status, options_for_select([['Vigente', 'Vigente'], ['Vencido', 'Vencido'], ['Pendiente', 'Pendiente'], ['A vencer', 'A vencer'], ['Antiguo', 'Antiguo'], ['Sin fecha', 'Sin fecha']]), {}, {:onChange => "hideDate();"}) %>
+    <% end %>
+
+
+  </div>
+
+  <div class="pure-control-group">
+    <%= label_tag :comments,"Comentarios" %>
+    <%= f.text_area :comments, :placeholder => 'Comentarios' %>
+  </div>
+
+  <div class="action">
+    <%= f.submit 'Guardar vencimiento', :class=>'button-success pure-button' %>
+  </div>
+
+<% end %>

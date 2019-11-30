@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Entidades</h1>
+
+<button class="pure-button pure-button-active"><%= link_to 'Nueva Entidad', new_entity_path %></button>
+</br>
+<br>
+
+<table class="pure-table pure-table-horizontal">
+  <thead>
+    <tr>
+      <th align="center">Nombre</th>
+      <th align="center">Comentarios</th>
+      <th colspan="3" align="center">Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @entities.each do |entity| %>
+      <tr>
+        <td align="center"><%= entity.name %></td>
+        <td align="center"><%= entity.comments %></td>
+        <td><%= link_to 'Ver Detalles', entity %></td>
+        <td><%= link_to 'Editar', edit_entity_path(entity) %></td>
+        <td><%= link_to 'Eliminar', entity, method: :delete, data: { confirm: 'Esta Ud Seguro?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

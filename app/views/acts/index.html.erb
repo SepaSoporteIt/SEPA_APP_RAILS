@@ -1,0 +1,72 @@
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="/tablefilter.js"></script>
+<script src="/datatables.min.js"></script>
+
+
+
+
+<script>
+  $( document ).ready(function() {
+    $('#table1').tableFilter({
+
+      // input field to filter table rows
+      'input' : 'input[type=search]',
+
+      // trigger events and elements
+      'trigger': {
+        
+        "event"   : "keyup", 
+        'element'   : undefined 
+      },
+
+      // case sensitive
+      'caseSensitive' :  false,
+      
+      // enable table sort
+      'sort'  : true, 
+
+      // not found element
+      // e.g. notFoundElement : ".not-found"
+      'notFoundElement' : null,
+    });
+  });  
+      $(document).ready( function () {
+        $('#table1').DataTable();
+    } );
+</script>
+
+<p id="notice"><%= notice %></p>
+
+<h1>Actas</h1>
+
+
+<button class="pure-button pure-button-active"><%= link_to 'Nueva acta', new_act_path %></button>
+</br>
+<br>
+<table class="pure-table pure-table-horizontal" id="table1">
+  <thead>
+    <tr>
+      <th align="center" align="center">Entidad</th>
+      <th align="center" align="center">Compania</th>
+      <th align="center" align="center">Estudio</th>
+      <th align="center" align="center">Fecha de Vencimiento</th> 
+      <th align="center" align="center">Comentarios</th>  
+    <!--  <th colspan="2">Acciones</th>  lo saco para que quede la tabla con el bord derecho mientras vemos lo de eliminar !-->
+      <th colspan="3" align="center">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @acts.each do |act| %>
+      <tr>
+        <td align="center"><%= link_to act.entity.name, act.entity %></td>
+        <td align="center"><%= link_to act.company.name + " - " + act.company.addressDirection + " " + act.company.addressNumber, act.company %></td>
+        <td align="center"><%= link_to act.study.name, act.study %></td>
+        <td align="center"><%= act.due_date %></td>
+        <td align="center"><%= act.comments %></td>
+        <td><%= link_to 'Ver Detalles', act %></td>
+        <td><%= link_to 'Editar', edit_act_path(act) %></td>
+        <td><%= link_to 'Eliminar', act, method: :delete, data: { confirm: 'Esta Ud Seguro?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

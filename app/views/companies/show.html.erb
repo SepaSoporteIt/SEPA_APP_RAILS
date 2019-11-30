@@ -1,0 +1,168 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <h1> <%=@company.name%></h1>
+</p>
+<button class="pure-button pure-button-active"><%= link_to 'Editar', edit_company_path(@company) %></button> &nbsp; | &nbsp; <button class="pure-button pure-button-active"><%= link_to 'Regresar al Listado', companies_path %></button> &nbsp; | &nbsp; <button class="pure-button pure-button-active"><%= link_to 'Eliminar', @company, method:  :delete, data: { confirm: 'Esta Ud Seguro?' } %></button>
+</br>
+<br>
+
+
+<style> .example-table td {   padding: 3px} </style>
+<table width="100%" class="pure-table pure-table-horizontal" >
+<thead> <tr> <th><strong><em>Info General</em></strong></th></tr></thead>
+<tbody>
+    <tr><td><strong>Nombre de Fantasia:</strong> &ensp; <%= @company.fantasy_name %></td></tr>
+    <tr class="pure-table-odd">
+      <td><strong>Responsable:</strong> &ensp; <%= @company.employee.name %> <%= @company.employee.surname %></td></tr>    
+    <tr><td><strong>Cuit:</strong> &ensp; <%= @company.cuit %></td></tr>
+    <tr class="pure-table-odd">
+      <td><strong>Casa Matriz o Sede:</strong> &ensp; <%= @company.companyType %></td></tr>
+    <tr><td><strong>Tipo de Industria:</strong> &ensp; <%= @company.industryTypeId %></td></tr>
+    <tr class="pure-table-odd">
+      <td><strong>Tipo de Industria 2:</strong> &ensp; <%= @company.industryTypeId2 %></td></tr>
+   <tr><td><strong>Habilitacion de establecimiento:</strong> &ensp; <%= @company.habpri %>   </td></tr>
+          <tr class="pure-table-odd">
+      <td><strong>Habilitacion secuendaria de establecimiento:</strong> &ensp; <%= @company.habsec %></td></tr>
+
+</tbody>
+</table>
+
+    
+<style> .example-table td {   padding: 3px} </style>
+<table width="100%" class="pure-table pure-table-horizontal" >
+<thead> <tr> <th><strong><em>Info Personal</em></strong></th></tr></thead>
+<tbody>
+    <tr><td><strong>Correo:</strong> &ensp; <%= @company.email %></td></tr>
+    <tr class="pure-table-odd">
+      <td><strong>Telefono:</strong> &ensp; <%= @company.tlf %></td></tr>
+    <tr><td><strong>Celular:</strong> &ensp; <%= @company.cellphone %></td></tr>
+    <tr class="pure-table-odd">
+      <td><strong>Interno:</strong> &ensp; <%= @company.internal_tlf %></td></tr>
+    <tr><td><strong>Contacto:</strong> &ensp; <%= @company.contact %></td></tr>
+</tbody>
+</table>
+
+
+<style> .example-table td {   padding: 3px} </style>
+<table width="100%" class="pure-table pure-table-horizontal" >
+<thead> <tr> <th><strong><em>Domicilio</em></strong></th></tr></thead>
+<tbody>
+    <tr><td><strong>Calle:</strong> &ensp; <%= @company.addressDirection %></td></tr>
+    <tr class="pure-table-odd">
+      <td><strong>Número:</strong> &ensp; <%= @company.addressNumber %></td></tr>
+    <tr><td><strong>Piso:</strong> &ensp; <%= @company.floor %></td></tr>
+    <tr class="pure-table-odd">
+      <td><strong>Departamento:</strong> &ensp; <%= @company.departament %></td></tr>
+    <tr><td><strong>Localidad:</strong> &ensp; <%= @company.localidad_partido.localidad %></td></tr>
+    <tr class="pure-table-odd">
+      <td><strong>Partido:</strong> &ensp; <%= @company.localidad_partido.partido %></td></tr>
+    <tr><td><strong>Codigo postal:</strong> &ensp; <%= @company.postal_code %></td></tr>    
+</tbody>
+</table>
+  
+<style> .example-table td {   padding: 3px} </style>
+<table width="100%" class="pure-table pure-table-horizontal" >
+<thead> <tr> <th><strong><em>Info Servicio</em></strong></th></tr></thead>
+<tbody>
+    
+    <tr><td><strong>Servicio HYS:</strong> &ensp; <%= @company.suscription ? 'Si':'No' %></td></tr>    
+    <tr class="pure-table-odd">
+      <td><strong>Cantidad mínima de visitas:</strong> &ensp; <%= @company.visitqty_min %></td></tr>
+    <tr><td><strong>Cantidad máxima de visitas:</strong> &ensp; <%= @company.visitqty_max %></td></tr>
+    <tr><td><strong>Ultimo cambio el:</strong> &ensp; <%= @company.updated_at  %></td></tr>
+</tbody>
+</table>
+
+<br/>
+
+<!--h3>Visitas</h3>
+<table class="pure-table pure-table-horizontal">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Tarea</th>
+      <th>Frecuencia de la tarea</th>
+      <th>Responsable</th>
+      <th>Fecha de la visita</th>
+      <th>Aprobado?</th>
+      <th colspan="2">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @company.visit.each do |visit| %>
+      <tr>
+        <td><%= visit.id %></td>
+        <td><%= visit.visitType.name %></td>
+        <td><%= visit.frecuency.name %></td>
+        <td><%= visit.employee.name %></td>
+        <td><%= visit.visitDate %></td>
+        <td><%= visit.aproved %></td>
+        <td><%= link_to 'Ver Detalles', visit %></td>
+        <td><%= link_to 'Eliminar', visit, method: :delete, data: { confirm: 'Esta Ud Seguro?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br-->
+
+<h2>Comentarios</h2>
+<button class="pure-button pure-button-active"><%= link_to 'Agregar Comentario', new_comment_path(@company) %></button>
+</br> 
+<br>
+<table class="pure-table" width="100%">
+  <thead>
+    <tr>
+      <th th width="25%">Fecha de Creacion</th>
+      <th>Comentario</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @company.comment.each do |comment| %>
+      <tr>
+        <td><%= comment.created_at %></td>
+        <td><%= comment.comment %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</br>
+
+<h2>Registro de Vencimientos</h2>
+
+<button class="pure-button pure-button-active"><%= link_to 'Nuevo Vencimiento', new_expiration_path %></button>
+</br>
+</br>
+<table class="pure-table pure-table-horizontal">
+  <thead>
+    <tr style="vertical-align: middle">
+      <th align="center">Profesional</th>
+      <th align="center">Estudio</th>
+      <th align="center">Fecha de Inicio</th>
+      <th align="center">Fecha de Finalizacion</th>
+      <th align="center">Estado</th>
+      <th colspan="3" align="center">Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr><td> </td> </tr>
+    <% Expiration.all.each do |expiration| %>
+      <%if expiration.companyId == @company.id %>
+      <!--if @var.start_with?(@company.name)-->
+        <tr bgcolor="<%= bgcolor_condition_status(expiration.status)%>"
+        style="<%= txtcolor_condition_status(expiration.status)%>";>
+          <td align="center"><%= expiration.employee.name + " " + expiration.employee.surname%></td>
+          <td align="center"><%= expiration.study.name %></td>
+          <td align="center"><%= expiration.start_date %></td>
+          <td align="center"><%= expiration.end_date %></td>
+          <td align="center"><%= expiration.status %></td>
+          <td><%= link_to 'Ver Detalles', expiration %></td>
+          <td><%= link_to 'Editar', edit_expiration_path(expiration) %></td>
+          <td><%= link_to 'Eliminar', expiration, method: :delete, data: { confirm: 'Esta Ud Seguro?' } %></td>
+        </tr>
+        <%end%>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,128 @@
+<div>
+    <style scoped>
+
+        .button-success,
+        .button-error,
+        .button-warning,
+        .button-secondary {
+            color: white;
+            border-radius: 4px;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-success {
+            background: rgb(28, 184, 65); /* this is a green */
+        }
+
+        .button-error {
+            background: rgb(255, 255, 0); /* this is a maroon */
+        }
+
+        .button-warning {
+            background: rgb(223, 117, 20); /* this is an orange */
+        }
+
+        .button-secondary {
+            background: rgb(102, 204, 255); /* this is a light blue */
+        }
+
+    </style>
+</div>
+
+<%= form_for @ordene, :html => {:class => 'pure-form pure-form-aligned'} do |f| %>
+<%= field_set_tag 'Por favor complete los siguientes datos basicos'  %>
+  <% if ordene.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ordene.errors.count, "error") %> se encontraron al intentar guardar:</h2>
+
+      <ul>
+      <% ordene.errors.each do |attr,msg| %>
+        <li><%=msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="pure-control-group">
+    <label><%= link_to "Profesional Asignado", :controller => 'employees', :action => 'new' %></label>
+    <%= select("ordene", "contacto_id", Employee.all.collect {|g| [ g.name, g.id ] }, {  :prompt => 'Prof. Asignado' } , :class => 'pure-input-1-4')%>
+    <%= label_tag(:contacto, "Contacto:") %>
+    <%= f.text_field :contacto, :placeholder => 'Contacto', :class => 'pure-u-1-4  ' %>
+  </div>
+
+  <div class="pure-control-group pure-u-1 pure-u-md-1-3">
+    <%= label_tag(:external_id, "Codigo:") %>
+    <%= f.text_field :external_id %>
+  </div>
+
+  <%= field_set_tag 'Por favor complete los campos de contacto'  %>
+  <div class="pure-control-group">
+    <label><%= link_to "Cliente", :controller => 'companies', :action => 'new' %></label>
+    <%= select("ordene", "companyId", Company.all.collect {|g| [ g.name, g.id ] }, {  :prompt => 'Cliente' } , :class => 'pure-input-1-4')%>
+  </div>
+  <div class="pure-control-group">
+    <%= label_tag(:direccion, "Direccion, Calle y Numero:") %>
+    <%= f.text_field :direccion, :placeholder => 'Direccion', :class => 'pure-input-2-3' %>
+  </div>
+
+  <div class="pure-control-group">
+    <%= label_tag(:prioridad, "Localidad:") %>
+    <%= f.text_field :prioridad, :placeholder => 'Localidad', :class => 'pure-input-1-4' %>
+    <%= label_tag(:vencimiento, "Fecha de la Visita:") %>
+    <%= f.date_select :vencimiento , :class => 'pure-input-1-3', order: [:day, :month, :year] %>
+  </div>
+
+  <div class="pure-control-group">
+    <%= label_tag(:email, "Correo:") %>
+    <%= f.text_field :email, :placeholder => 'E-mail', :class => 'pure-input-2-3' %>
+  </div>
+
+  <div class="pure-control-group">
+    <%= label_tag(:celular, "Celular:") %>
+    <%= f.text_field :celular, :placeholder => 'Celular', :class => 'pure-u-1-4' %>
+    <%= label_tag(:telefono, "Telefono:") %>
+    <%= f.text_field :telefono, :placeholder => 'Telefono', :class => 'pure-u-1-4' %>
+  </div>
+
+  <div class="pure-control-group">
+    <label><%= link_to "Destino", :controller => 'industry_types', :action => 'index' %></label>
+    <%= select("company", "industryTypeId", IndustryType.all.collect {|e| [ e.name, e.id ] }, { :prompt => 'Destino' } , :class => 'pure-input-1-4')%>
+  </div>
+
+  <div class="pure-control-group">
+      <%= label_tag(:frecuencyTypeId, "Frecuencia de la Visita:") %>
+      <%= select("visit", "frecuencyTypeId", Frecuency.all.collect {|e| [ e.name, e.id ] }, { :prompt => 'Frecuencia de la Visita' }, :class => 'pure-input-1-4')%>
+  </div>
+
+<!--h2>Tareas/Permanencia</h2>
+
+  <div class="pure-form pure-form-aligned">
+    <%= f.nested_fields_for :visit, legend: "Complete los datos de la Tarea/Permanencia" do |ff| %>
+      <div class="pure-control-group">
+        <%= label_tag(:visitTypeId, "Tarea:") %>
+        <%= ff.select :visitTypeId, options_for_select(VisitType.all.collect {|e| [ e.name, e.id ]}, ff.object.visitTypeId), :include_blank => "Tipo de Tarea", :class => 'pure-input-1-3'%>
+      </div>
+      <div class="pure-control-group">
+        <%= label_tag(:frecuencyTypeId, "Tipo de Frecuencia:") %>
+        <%= ff.select :frecuencyTypeId, options_for_select(Frecuency.all.collect {|e| [ e.name, e.id ]}, ff.object.frecuencyTypeId), :include_blank => "Frecuencia de Tarea" , :class => 'pure-input-1-3'%>
+        <%= label_tag(:employeeId, "Responsable:") %>
+        <%= ff.select :employeeId, options_for_select(Employee.all.collect {|e| [ e.name, e.id ]}, ff.object.employeeId), :include_blank => "Realizador de la Tarea" , :class => 'pure-input-1-3'%>
+      </div>
+      <div class="pure-control-group">
+        <%= label_tag(:visitDate, "Fecha de la Visita:") %>
+        <%= ff.date_select :visitDate , :class => 'pure-input-1-3', order: [:day, :month, :year] %>
+      </div>
+      <%= ff.remove_nested_fields_link 'Eliminar esta Tarea', class: 'button-error pure-button',role: 'button'%>
+  <% end %>
+
+  </div>
+  <div class="action">
+    <%= f.add_nested_fields_link :visit,'Agregar', class: 'button-secondary pure-button'%>
+  </div-->
+  <hr/>
+  <br/>
+  <div class="action">
+    <%= f.submit 'Guardar O de Trabajo', :class=>'button-success pure-button' %>
+  </div>
+<% end %>
+

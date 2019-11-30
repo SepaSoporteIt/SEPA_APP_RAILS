@@ -1,0 +1,17 @@
+language: ruby
+rvm:
+  - 2.5.0
+
+services:
+  - docker
+
+script:
+ - bundle install
+
+notifications:
+  slack: 
+    rooms:
+    - sepait:4pbltgihXwt8EGP8Xw0jAIr7
+
+    template:
+    - "Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository_slug}@%{branch} by %{author} %{result} in %{duration}"

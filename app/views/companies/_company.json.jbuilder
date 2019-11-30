@@ -1,0 +1,2 @@
+json.extract! company, :id, :habpri, :habsec, :industryTypeId, :industryTypeId2, :employeeId, :name, :email, :addressDirection,:addressNumber, :cuit, :comment, :suscription, :created_at, :updated_at
+json.url company_url(company, format: :json)

@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  direccion: MyString
+  localidad: MyString
+  localidad_id: 1
+  industria_id: 1
+  contacto: MyString
+  contacto_id: 1
+  cuit: MyString
+  celular: MyString
+  email: MyString
+  telefono: MyString
+  estatus_id: 1
+  prioridad: MyString
+  prioridad_id: 1
+  vencimiento: 2018-12-16
+
+two:
+  direccion: MyString
+  localidad: MyString
+  localidad_id: 1
+  industria_id: 1
+  contacto: MyString
+  contacto_id: 1
+  cuit: MyString
+  celular: MyString
+  email: MyString
+  telefono: MyString
+  estatus_id: 1
+  prioridad: MyString
+  prioridad_id: 1
+  vencimiento: 2018-12-16

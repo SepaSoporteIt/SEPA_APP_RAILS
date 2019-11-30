@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @solicitador.name %>
+</p>
+
+<%= link_to 'Editar', edit_solicitador_path(@solicitador) %> |
+<%= link_to 'Regresar al Listado', solicitadors_path %>

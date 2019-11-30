@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  industryTypeId: 1
+  employeeId: 1
+  name: MyString
+  email: MyString
+  address: MyString
+  cuit: MyString
+  comment: MyString
+  suscription: false
+
+two:
+  industryTypeId: 1
+  employeeId: 1
+  name: MyString
+  email: MyString
+  address: MyString
+  cuit: MyString
+  comment: MyString
+  suscription: false

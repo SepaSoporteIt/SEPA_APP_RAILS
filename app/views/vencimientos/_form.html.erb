@@ -1,0 +1,91 @@
+<div>
+    <style scoped>
+
+        .button-success,
+        .button-error,
+        .button-warning,
+        .button-secondary {
+            color: white;
+            border-radius: 4px;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-success {
+            background: rgb(28, 184, 65); /* this is a green */
+        }
+
+        .button-error {
+            background: rgb(255, 255, 0); /* this is a maroon */
+        }
+
+        .button-warning {
+            background: rgb(223, 117, 20); /* this is an orange */
+        }
+
+        .button-secondary {
+            background: rgb(102, 255, 255); /* this is a light blue */
+        }
+
+    </style>
+</div>
+
+<%= form_for @vencimiento, :html => {:class => 'pure-form pure-form-aligned'} do |f| %>
+<%= field_set_tag 'Por favor complete los siguientes campos'  %>
+  <% if vencimiento.errors.any? %>
+    <div id="error_explanation">
+      <% if vencimiento.errors.count ==1 %>
+      <h2>Se encontro <%= vencimiento.errors.count%> error en la creacion de este vencimiento</h2>
+      <% else %>
+      <h2>Se encontraron <%= vencimiento.errors.count%> errores en la creacion de este vencimiento</h2>
+      <% end %>
+      <!-- cambio carteles de error dependiendo de la cantidad de estos mismos !-->
+      <ul>
+      <% vencimiento.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+  <div class="pure-control-group">
+    <label><%= link_to "Clientes", :controller => 'companies', :action => 'index' %></label>
+    <%= select("vencimiento", "company_Id", Company.all.collect {|e| [ e.name ] }, { :prompt => 'Cliente' } , :class => 'pure-input-1-4')%>
+  </div>
+
+  <div class="pure-control-group">
+<label><%= link_to "Profesionales", :controller => 'employees', :action => 'index' %></label>
+    <%= select("vencimiento", "employee_Id", Employee.all.collect {|g| [ g.name+" "+g.surname] }, {  :prompt => 'Profesional' } , :class => 'pure-input-1-4')%>
+  </div>
+
+  <div class="pure-control-group">
+    <label><%= link_to "Estudio", :controller => 'studies', :action => 'index' %></label>
+    <%= select("vencimiento", "study_Id", Study.all.collect {|h| [ h.name ] }, { :prompt => 'Estudio' } , :class => 'pure-input-1-4')%>
+  </div>
+
+  <div class="pure-control-group">
+    <%= label_tag :start_date, "Fecha de inicio (dd-mm-aaaa)" %>
+    <%= f.text_field :start_date, :placeholder => 'Fecha de inicio', :class => 'pure-u-1-4' %>
+  </div>
+
+  <div class="pure-control-group">
+    <%= label_tag :end_date, "Fecha de finalizacion (dd-mm-aaaa)" %>
+    <%= f.text_field :end_date, :placeholder => 'Fecha de finalizacion', :class => 'pure-u-1-4' %>
+  </div>
+
+  <div class="pure-control-group">
+    <%= label_tag :status, "Estado" %>
+    <%= f.select(:status, options_for_select([['Vigente', 'Vigente'], ['Vencido', 'Vencido'], ['Pendiente', 'Pendiente'], ['Antiguo', 'Antiguo']]))%>
+  </div>
+
+  <div class="pure-control-group">
+    <%= label_tag :comments,"Comentarios" %>
+    <%= f.text_area :comments, :placeholder => 'Comentarios' %>
+  </div>
+
+  <div class="action">
+    <%= f.submit 'Guardar vencimiento', :class=>'button-success pure-button' %>
+  </div>
+
+<% end %>

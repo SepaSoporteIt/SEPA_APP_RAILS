@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<button class="pure-button pure-button-active"><%= link_to 'Editar', edit_act_path(@act) %></button> &nbsp; | &nbsp; 
+<button class="pure-button pure-button-active"><%= link_to 'Regresar', acts_path %></button>
+&nbsp; | &nbsp; 
+<button class="pure-button pure-button-active"><%= link_to 'Eliminar', @act, method: :delete, data: { confirm: 'Esta Ud Seguro?' } %></button>
+
+<!--<%= link_to 'Eliminar', @company, :confirm => "Are you sure?", :method => :delete %>
+  agrego el boton eliminar y lo cambio de lugar asi sigue el orden de companies !-->
+
+<p>
+  <strong>Entidad:</strong>
+  <%= @act.entity.name %>
+</p>
+
+<p>
+  <strong>Compania:</strong>
+  <%= @act.company.name %>
+</p>
+
+<p>
+  <strong>Estudio:</strong>
+  <%= @act.study.name %>
+</p>
+
+<p>
+  <strong>Fecha de Vencimiento:</strong>
+  <%= @act.due_date %>
+</p>
+
+<p>
+  <strong>Comentarios:</strong>
+  <%= @act.comments %>
+</p>

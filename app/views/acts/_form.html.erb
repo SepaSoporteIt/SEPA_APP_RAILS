@@ -1,0 +1,80 @@
+<div>
+    <style scoped>
+
+        .button-success,
+        .button-error,
+        .button-warning,
+        .button-secondary {
+            color: white;
+            border-radius: 4px;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-success {
+            background: rgb(28, 184, 65); /* this is a green */
+        }
+
+        .button-error {
+            background: rgb(255, 255, 0); /* this is a maroon */
+        }
+
+        .button-warning {
+            background: rgb(223, 117, 20); /* this is an orange */
+        }
+
+        .button-secondary {
+            background: rgb(102, 255, 255); /* this is a light blue */
+        }
+
+    </style>
+</div>
+
+<%= form_for @act, :html => {:class => 'pure-form pure-form-aligned'} do |f| %>
+<%= field_set_tag 'Por favor complete los siguientes campos'  %>
+  <% if act.errors.any? %>
+    <div id="error_explanation">
+      <% if act.errors.count ==1 %>
+      <h2>Se encontro <%= act.errors.count%> error en la creacion de esta acta</h2>
+      <% else %>
+      <h2>Se encontraron <%= act.errors.count%> errores en la creacion de esta acta</h2>
+      <% end %>
+      <!-- cambio carteles de error dependiendo de la cantidad de estos mismos !-->
+      <ul>
+      <% act.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+<div class="pure-control-group">
+  <label><%= link_to "Entidad", :controller => 'entities', :action => 'index' %></label>
+  <%= select("act", "entityId", Entity.all.collect {|e| [e.name , e.id] }.sort, { :prompt => 'Entidad' } , :class => 'pure-input-1-4')%>
+</div>
+
+<div class="pure-control-group">
+  <label><%= link_to "Cliente", :controller => 'companies', :action => 'index' %></label>
+  <%= select("act", "companyId", Company.all.collect {|c| [ c.name+" " +"-"+" "+c.addressDirection+" "+c.addressNumber , c.id] }.sort, { :prompt => 'Cliente' } , :class => 'pure-input-1-4')%>
+</div>
+
+<div class="pure-control-group">
+  <label><%= link_to "Estudio", :controller => 'studies', :action => 'index' %></label>
+  <%= select("act", "studyId", Study.all.collect {|s| [ s.name , s.id] }.sort, { :prompt => 'Estudio' } , :class => 'pure-input-1-4')%>
+</div>
+
+<div class="pure-control-group">
+  <%= label_tag :due_date, "Fecha de Vencimiento" %>
+  <%= f.date_select :due_date, order: [:day, :month, :year] %>
+</div>
+
+<div class="pure-control-group">
+  <%= label_tag :comments,"Comentarios" %>
+  <%= f.text_area :comments, :placeholder => 'Comentarios' %>
+</div>
+
+  <div class="action">
+    <%= f.submit 'Guardar acta', :class=>'button-success pure-button' %>
+  </div>
+
+<% end %>

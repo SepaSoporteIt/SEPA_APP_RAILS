@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cliente:</strong>
+  <%= @vencimiento.company_Id %>
+</p>
+
+<p>
+  <strong>Profesional:</strong>
+  <%= @vencimiento.employee_Id %>
+</p>
+
+<p>
+  <strong>Estudio:</strong>
+  <%= @vencimiento.study_Id %>
+</p>
+
+<p>
+  <strong>Fecha de Inicio:</strong>
+  <%= @vencimiento.start_date %>
+</p>
+
+<p>
+  <strong>Fecha de Finalizacion:</strong>
+  <%= @vencimiento.end_date %>
+</p>
+
+<p>
+  <strong>Estado:</strong>
+  <%= @vencimiento.status %>
+</p>
+
+<p>
+  <strong>Comentarios:</strong>
+  <%= @vencimiento.comments %>
+</p>
+
+<%= link_to 'Editar', edit_vencimiento_path(@vencimiento) %> |
+<%= link_to 'Regresar', vencimientos_path %>

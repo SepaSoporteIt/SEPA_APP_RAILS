@@ -1,0 +1,102 @@
+<div>
+    <style scoped>
+
+        .button-success,
+        .button-error,
+        .button-warning,
+        .button-secondary {
+            color: white;
+            border-radius: 4px;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-success {
+            background: rgb(28, 184, 65); /* this is a green */
+        }
+
+        .button-error {
+            background: rgb(255, 255, 0); /* this is a maroon */
+        }
+
+        .button-warning {
+            background: rgb(223, 117, 20); /* this is an orange */
+        }
+
+        .button-secondary {
+            background: rgb(102, 255, 255); /* this is a light blue */
+        }
+
+    </style>
+</div>
+<%= form_for @visit, :html => {:class => 'pure-form pure-form-aligned'} do |f| %>
+<%= field_set_tag 'Por favor complete los siguientes campos'  %>
+  <% if visit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(visit.errors.count, "error") %> prohibited this visit from being saved:</h2>
+
+      <ul>
+      <% visit.errors.each do |attr,msg| %>
+        <li><%=msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="pure-control-group">
+    <%= label_tag(:external_id, "Codigo:") %>
+    <%= f.text_field :external_id %>
+    <%= label_tag(:order_id, "Asociar a la O. de Trabajo con codigo:") %>
+    <%= select("visit", "order_id", Ordene.all.collect {|e| [ e.external_id , e.id ] }, { :prompt => 'Seleccione una O de Trabajo' }, :class => 'pure-input-1-4')%>
+  </div>
+
+  <div class="pure-control-group">
+    <%= label_tag(:visitTypeId, "Tipo de Tarea:") %>
+    <%= select("visit", "visitTypeId", VisitType.all.collect {|e| [ e.name, e.id ] }, { :prompt => 'Seleccione un Tipo de Tarea' }, :class => 'pure-input-1-4')%>
+    <%= label_tag(:companyId, "Cliente:") %>
+    <%= select("visit", "companyId", Company.all.collect {|e| [ e.name, e.id ] }, { :prompt => 'Seleccione un Cliente' }, :class => 'pure-input-1-4')%>
+  </div>
+
+  <div class="pure-control-group">
+    <%= label_tag(:frecuencyTypeId, "Frecuencia de la Tarea:") %>
+    <%= select("visit", "frecuencyTypeId", Frecuency.all.collect {|e| [ e.name, e.id ] }, { :prompt => 'Frecuencia de la Tarea' }, :class => 'pure-input-1-4')%>
+    <%= label_tag(:employeeId, "Responsable:") %>
+    <%= select("visit", "employeeId", Employee.all.collect {|e| [ e.name, e.id ] }, { :prompt => 'Responsable' }, :class => 'pure-input-1-4')%>
+  </div>
+
+  <div class="pure-control-group">
+    <%= f.label :visitDate, "Fecha de la Tarea:" %>
+    <%= f.date_select :visitDate, order: [:day, :month, :year] %>
+    <%= f.label :aproval_date, "Fecha de aprobacion:" %>
+    <%= f.date_select :aproval_date, order: [:day, :month, :year] %>
+  </div>
+
+  <div class="pure-control-group">
+    <%= label_tag(:observation, "Observacion:") %>
+    <%= f.text_area :observation, :placeholder => 'Observacion'%>
+  </div>
+
+  <div class="pure-control-group">
+    <%= f.label :aproval_budget_date, "Fecha de Aprovacion de presupuesto:" %>
+    <%= f.date_select :aproval_budget_date %>
+  </div>
+
+<h2>Documentos</h2>
+
+  <div class="pure-form pure-form-aligned">
+    <%= f.nested_fields_for :document, legend: "Agregue documentos" do |ff| %>
+      <div class="pure-u-1 pure-u-md-1-3">
+        <%= label_tag(:name, "Nombre del documento:") %>
+        <%= ff.text_field :name %>
+      </div>
+      <div class="pure-u-1 pure-u-md-1-3">
+        <%= label_tag(:images, "Documento:") %>
+        <%= ff.file_field :images %>
+      </div>
+      <%= ff.remove_nested_fields_link 'Eliminar este Documento', class: 'button-error pure-button',role: 'button'%>
+    <% end %>
+  </div>
+  <div class="action">
+    <%= f.add_nested_fields_link :document,'Agregar Documento', class: 'button-secondary pure-button'%>
+    <%= f.submit 'Guardar Visita', :class=>'button-success pure-button' %>
+  </div>
+<% end %>

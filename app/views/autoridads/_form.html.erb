@@ -1,0 +1,54 @@
+<div>
+    <style scoped>
+
+        .button-success,
+        .button-error,
+        .button-warning,
+        .button-secondary {
+            color: white;
+            border-radius: 4px;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-success {
+            background: rgb(28, 184, 65); /* this is a green */
+        }
+
+        .button-error {
+            background: rgb(255, 255, 0); /* this is a maroon */
+        }
+
+        .button-warning {
+            background: rgb(223, 117, 20); /* this is an orange */
+        }
+
+        .button-secondary {
+            background: rgb(102, 204, 255); /* this is a light blue */
+        }
+
+    </style>
+</div>
+<%= form_for @autoridad, :html => {:class => 'pure-form pure-form-aligned'} do |f| %>
+<%= field_set_tag 'Por favor complete los siguientes campos'  %>
+  <% if autoridad.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(autoridad.errors.count, "error") %> prohibited this autoridad from being saved:</h2>
+
+      <ul>
+      <% autoridad.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="pure-control-group">
+    <%= label_tag(:name, "Nombre:") %>
+    <%= f.text_field :name, :placeholder => 'Nombre', :class => 'pure-u-1-4' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Guardar Autoridad', :class=>'button-success pure-button' %>
+  </div>
+<% end %>
+ 

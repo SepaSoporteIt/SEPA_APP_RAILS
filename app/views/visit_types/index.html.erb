@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tipos de Tareas</h1>
+
+<table class="pure-table pure-table-horizontal">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @visit_types.each do |visit_type| %>
+      <tr>
+        <td><%= visit_type.name %></td>
+        <td><%= visit_type.description %></td>
+        <td><%= link_to 'Ver Detalle', visit_type %></td>
+        <td><%= link_to 'Editar', edit_visit_type_path(visit_type) %></td>
+        <td><%= link_to 'Eliminar', visit_type, method: :delete, data: { confirm: 'Esta ud seguro?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

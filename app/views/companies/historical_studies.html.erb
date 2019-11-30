@@ -1,0 +1,38 @@
+<h1>company.name</h1> 
+<h1 class="pure-menu-item"></h1>
+
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <h1> <%=@company.name%></h1>
+</p>
+
+<%= link_to 'Info', company %>
+
+<style> .example-table td {   padding: 3px} </style>
+<table width="100%" class="pure-table pure-table-horizontal" >
+	<thead> <tr> <th><strong><em>Historico Estudio</em></strong></th></tr></thead>
+
+	<% @expirations.each do |expiration| %>
+	<tbody>
+    	<tr><td><strong>Estudio:</strong> &ensp; <%= @expiration.studyId %></td></tr>
+    	<tr class="pure-table-odd">
+
+    	<tr><td><strong>Profesional:</strong> &ensp; <%= @expiration.employeeId %></td></tr>
+    	<tr class="pure-table-odd">
+
+      	<td><strong>Fecha de inicio del estudio:</strong> &ensp; <%= @expiration.start_date%></td></tr>
+      	<tr class="pure-table-odd">
+
+      	<tr><td><strong>Fecha de vencimiento:</strong> &ensp; <%= @expiration.end_date %></td></tr>
+    	<tr class="pure-table-odd">
+
+     	<td><strong>Estado:</strong> &ensp; <%= @expiration.status %></td></tr>
+      	<tr class="pure-table-odd">
+
+    	<tr><td><strong>Comentario:</strong> &ensp; <%= @expiration.comment %></td></tr>
+    	<tr class="pure-table-odd">
+
+	</tbody>
+</table>

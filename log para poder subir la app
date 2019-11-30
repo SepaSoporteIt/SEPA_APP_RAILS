@@ -1,0 +1,18 @@
+ delete gemlock
+
+ delete 
+ "test:
+  <<: *default
+  database: db/test.sqlite3
+
+production:
+  <<: *default
+  database: db/production.sqlite3"
+
+bundle install
+
+rake db:create
+
+rake db:drop db:create db:schema:load
+
+rails s

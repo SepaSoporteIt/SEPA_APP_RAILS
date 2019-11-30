@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<button class="pure-button pure-button-active"><%= link_to 'Editar', edit_entity_path(@entity) %></button> &nbsp; | &nbsp; 
+<button class="pure-button pure-button-active"><%= link_to 'Regresar', entities_path %></button>
+&nbsp; | &nbsp; 
+<button class="pure-button pure-button-active"><%= link_to 'Eliminar', @entity, method: :delete, data: { confirm: 'Esta Ud Seguro?' } %></button>
+</br></br>
+<table width="100%" class="pure-table pure-table-horizontal" >
+<thead> <tr> <th><strong><em>Entidad</em></strong></th></tr></thead>
+<tbody>
+
+  <tr><td><strong>Nombre:</strong>               <%= @entity.name %></td></tr>
+  <tr><td><strong>Descripcion: </strong>              <%= @entity.comments %></td></tr>
+</table>

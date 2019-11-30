@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @comment.comment %>
+</p>
+
+<%= link_to 'Editar', edit_comment_path(@comment) %> |
+<%= link_to 'Regresar', company_path(@comment.companyId) %>

@@ -1,0 +1,85 @@
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="/tablefilter.js"></script>
+<script src="/datatables.min.js"></script>
+
+
+<script>
+  $( document ).ready(function() {
+    $('#table1').tableFilter({
+
+      // input field to filter table rows
+      'input' : 'input[type=search]',
+
+      // trigger events and elements
+      'trigger': {
+        
+        "event"   : "keyup", 
+        'element'   : undefined 
+      },
+
+      // case sensitive
+      'caseSensitive' :  false,
+      
+      // enable table sort
+      'sort'  : true, 
+
+      // not found element
+      // e.g. notFoundElement : ".not-found"
+      'notFoundElement' : null,
+
+    });
+  });  
+$(document).ready( function() {
+  $('#table1').dataTable( {
+    "iDisplayLength": 50,
+      "searching": false, 
+        "lengthMenu": [[50, 75, 100, -1], [50, 75, 100, "Todos"]],
+        "pagingType": "numbers"
+      } );
+} )
+
+
+</script>
+
+<p id="notice"><%= notice %></p>
+
+<h1>PERSONAL - PROFESIONAL</h1>
+
+<button class="pure-button pure-button-active"><%= link_to 'Nuevo Profesional', new_employee_path %></button>
+</br>
+
+<br>
+      <%= form_tag(employees_path, method: :get) do %>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag 'Buscar', name: nil %>
+      &nbsp; &nbsp; &nbsp; &nbsp; <%= "Puede buscar por nombre, apellido o número de matrícula" %>
+      <% end %>
+</br>
+<table class="pure-table pure-table-horizontal" id="table1">
+  <thead>
+      <tr style="vertical-align: middle">
+      <th align="center" class="menu-sticky">Nombre Completo</th>
+      <th align="center" class="menu-sticky">Matrícula</th>
+      <th align="center" class="menu-sticky">Cuit</th>
+      <th align="center" class="menu-sticky">Numero telefonico</th>
+      <th align="center" class="menu-sticky">Tipo</th>      
+    <!--  <th colspan="2">Acciones</th>  lo saco para que quede la tabla con el bord derecho mientras vemos lo de eliminar !-->
+      <th align="center" class="menu-sticky">Acciones</th> 
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @employees.each do |employee| %>
+      <tr>
+        <td align="center"><%= link_to employee.name+" "+employee.surname, employee %></td>
+        <td align="center"><%= employee.mat_number %></td>
+        <td align="center"><%= employee.cuit %></td>
+        <td align="center"><%= employee.tlf %></td>
+        <td align="center"><%= employee.tipo ? 'Externo':'Interno'%></td> 
+        <td align="center"><%= link_to 'Editar', edit_employee_path(employee) %></td>
+        <!-- <td><%= link_to 'Eliminar', employee, method: :delete, data: { confirm: 'Esta Ud Seguro?' } %></td> !-->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

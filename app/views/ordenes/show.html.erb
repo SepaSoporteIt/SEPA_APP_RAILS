@@ -1,0 +1,68 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <h1> O. de Trabajo</h1> <h2> Codigo: <%= @ordene.external_id %> </h2>
+  <%= link_to 'Editar', edit_ordene_path(@ordene) %> |
+  <%= link_to 'Agregar Tarea', visits_path %> |
+  <%= link_to 'Regresar al Listado', ordenes_path %>
+</p>
+
+<style> .example-table td {   padding: 3px} </style>
+
+<table width="100%" class="example-table" border="0">
+<tbody>
+    <tr>
+        <td><strong>Cliente:</strong></td>
+        <td><%= @ordene.company.name %></td>
+        <td><strong>Direccion:</strong></td>
+        <td><%= @ordene.direccion %></td>
+    </tr>
+    <tr>
+      <td><strong>Localidad:</strong></td>
+      <td><%= @ordene.localidad %></td>
+      <td><strong>Rubro:</strong></td>
+      <td><%= @ordene.company.industryType.name %></td>
+    </tr>
+    <tr>
+      <td><strong>Contacto:</strong></td>
+      <td><%= @ordene.employee.name %></td>
+      <td><strong>Cuit:</strong></td>
+      <td><%=  @ordene.cuit %></td>
+    </tr>
+    <tr>
+      <td><strong>Nro Cel:</strong></td>
+      <td><%= @ordene.celular %></td>
+      <td><strong>Nro Telefono:</strong></td>
+      <td><%= @ordene.telefono %></td>
+    </tr>
+    <tr>
+      <td><strong>Correo:</strong></td>
+      <td><%= @ordene.email %></td>
+      <td><strong>Vencimiento:</strong></td>
+      <td><%= @ordene.vencimiento %></td>
+    </tr>
+    <tr>
+      <td><strong>Estado:</strong></td>
+      <td><%= @ordene.status %></td>
+      <td><strong>Prioridad:</strong></td>
+      <td><%= @ordene.prioridad %></td>
+    </tr>
+</table>
+<br/>
+
+<h3>Tareas</h3>
+
+<ul class="pure-menu-list">
+    <% @ordene.visit.each do |visita| %>
+      <tr>
+        <li class="pure-menu-item">
+          <div> Codigo: <%= visita.external_id %> | Nombre: <%= visita.visitType.name %></div>
+          <div>Profesional: <%= visita.employee.name %> | Vencimiento: <%= visita.visitDate %></div>
+          <div>Ultima Nota: <%= visita.visit_comment.last == nil ? '' :  visita.visit_comment.last.note %></div>
+        <%= link_to 'Editar Tarea', edit_visit_path(visita) %> | <%= link_to 'Eliminar', visita, method: :delete, data: { confirm: 'Esta Ud Seguro?' } %>
+        <hr/>
+      </li>
+    <% end %>
+</ul>
+
+

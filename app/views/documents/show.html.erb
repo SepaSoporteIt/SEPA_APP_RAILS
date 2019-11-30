@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Visitid:</strong>
+  <%= @document.visitId %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @document.name %>
+</p>
+
+<%= image_tag @document.images.url %>
+
+<%= link_to 'Editar', edit_document_path(@document) %> |
+<%= link_to 'Regresar al Listado', documents_path %>

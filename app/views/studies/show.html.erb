@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+
+<button class="pure-button pure-button-active"><%= link_to 'Editar', edit_study_path(@study)  %></button> &nbsp; | &nbsp; <button class="pure-button pure-button-active"><%= link_to 'Regresar al Listado', studies_path %></button> &nbsp; | &nbsp; <button class="pure-button pure-button-active"><%= link_to 'Eliminar', @study, method:  :delete, data: { confirm: 'Esta Ud Seguro?' } %></button>
+</br>
+<br>
+
+
+<style> .example-table td {   padding: 3px} </style>
+<table width="100%" class="pure-table pure-table-horizontal" >
+<thead> <tr> <th><strong><em>Info General</em></strong></th></tr></thead>
+<tbody>
+    <tr><td><strong>Nombre del estudio:</strong> &ensp;<%= @study.name %></td></tr>
+    <tr class="pure-table-odd">
+      <td><strong>Resolucion:</strong> &ensp;   <%= @study.resolution %></td></tr>    
+    <tr><td><strong>Legislacion:</strong> &ensp; <%= @study.legislation %></td></tr>
+</tbody>
+</table>

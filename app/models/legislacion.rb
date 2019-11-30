@@ -1,0 +1,2 @@
+class Legislacion < ApplicationRecord
+end

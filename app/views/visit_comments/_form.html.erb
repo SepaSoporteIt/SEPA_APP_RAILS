@@ -1,0 +1,56 @@
+<div>
+    <style scoped>
+
+        .button-success,
+        .button-error,
+        .button-warning,
+        .button-secondary {
+            color: white;
+            border-radius: 4px;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-success {
+            background: rgb(28, 184, 65); /* this is a green */
+        }
+
+        .button-error {
+            background: rgb(255, 255, 0); /* this is a maroon */
+        }
+
+        .button-warning {
+            background: rgb(223, 117, 20); /* this is an orange */
+        }
+
+        .button-secondary {
+            background: rgb(102, 204, 255); /* this is a light blue */
+        }
+
+    </style>
+</div>
+<%= form_for @visit_comment, :html => {:class => 'pure-form pure-form-aligned'} do |f| %>
+<%= field_set_tag 'Por favor complete los siguientes campos'  %>
+  <% if visit_comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(visit_comment.errors.count, "error") %> errores ocurrieron al intentar guardar:</h2>
+
+      <ul>
+      <% visit_comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <%= f.hidden_field :visit_id %>
+  </div>
+
+  <div class="field">
+    <%= label_tag(:note, "Comentario:") %>
+    <%= f.text_area :note %>
+  </div>
+
+  <div class="action">
+    <%= f.submit 'Guardar Comentario', :class=>'button-success pure-button' %>
+  </div>
+<% end %>

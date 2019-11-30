@@ -1,0 +1,118 @@
+<div>
+    <style scoped>
+
+        .button-success,
+        .button-error,
+        .button-warning,
+        .button-secondary {
+            color: white;
+            border-radius: 4px;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-success {
+            background: rgb(28, 184, 65); /* this is a green */
+        }
+
+    </style>
+</div>
+<%= form_for @employee, :html => {:class => 'pure-form pure-form-aligned'} do |f| %>
+<%= field_set_tag 'Por favor complete la informacion personal'  %>
+
+<!-- Manejo de errores en vista !--> 
+  <% if employee.errors.any? %>
+    <div id="error_explanation">
+
+      <% if employee.errors.count ==1 %>
+        <h2>Se encontro <%= employee.errors.count%> error en la creacion de este profesional</h2>
+      <% else %>
+        <h2>Se encontraron <%= employee.errors.count%> errores en la creacion de este profesional</h2>
+        <% end %>    
+        <!-- cambio carteles de error dependiendo de la cantidad de estos mismos !-->
+      <ul>
+        <% employee.errors.each do |attr,message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+
+    </div>
+  <% end %>
+
+
+  <div class="pure-control-group">
+    <label class= "tooltip">Nombre* :<span class="tooltiptext">Los campos indicados con * son obligatorios </span> </label> 
+    <%= f.text_field :name, :placeholder => 'Nombre', :class => 'pure-input-1-4'%>
+    <label class= "tooltip">Apellido* :<span class="tooltiptext">Los campos indicados con * son obligatorios </span> </label> 
+    <%= f.text_field :surname, :placeholder => 'Apellido', :class => 'pure-input-1-4'%>
+
+  </div>
+
+  <div class="pure-control-group">
+    <label class= "tooltip">Correo* :<span class="tooltiptext">Los campos indicados con * son obligatorios </span> </label> 
+    <%= f.text_field :email, :placeholder => 'Correo', :class => 'pure-input-1-4'%>    
+  </div>
+
+  <div class="pure-control-group">
+    <%= label_tag(:tlf, "Telefono:") %>
+    <%= f.text_field :tlf, :placeholder => 'Telefono', :class => 'pure-input-1-4'%>
+    <label class= "tooltip">Celular* :<span class="tooltiptext">Los campos indicados con * son obligatorios </span> </label> 
+    <%= f.text_field :celular, :placeholder => 'Celular', :class => 'pure-input-1-4'%>
+  </div>
+
+<%= field_set_tag 'Complete la informacion profesional'  %>
+
+  <div class="pure-control-group">
+    <%= label_tag(:mat_number, "Matricula:") %>
+    <%= f.text_field :mat_number, :placeholder => 'Numero de Matricula', :class => 'pure-input-1-4'%>
+    <label class= "tooltip">Cuit/Cuil * :<span class="tooltiptext">Los campos indicados con * son obligatorios </span> </label> 
+    <%= f.text_field :cuit, :placeholder => 'Cuit/Cuil', :class => 'pure-input-1-4'%>
+  </div>
+
+
+  <div class="pure-control-group">
+    <%= label_tag(:degree, "Titulo:") %>
+    <%= f.text_field :degree, :placeholder => 'Titulo', :class => 'pure-input-1-4'%>
+    <%= label_tag(:especializacion, "Especializacion:") %>
+    <%= f.text_field :especializacion, :placeholder => 'Especializacion', :class => 'pure-input-1-4'%>
+  </div>
+<%= field_set_tag 'Complete el domicilio'  %>
+
+  <div class="pure-control-group">
+    <%= label_tag(:addressDirection, "Direccion:") %>
+    <%= f.text_field :addressDirection, :placeholder => 'Direccion', :class => 'pure-input-1-4'%>
+    <%= label_tag(:addressNumber, "Número:") %>
+    <%= f.text_field :addressNumber, :placeholder => 'Número', :class => 'pure-input-1-4'%>
+  </div>  
+    <div class="pure-control-group">
+    <%= label_tag(:floor, "Piso:") %>
+    <%= f.text_field :floor, :placeholder => 'Piso', :class => 'pure-input-1-4'%>
+    <%= label_tag(:departament, "Departamento:") %>
+    <%= f.text_field :departament, :placeholder => 'Departamento', :class => 'pure-input-1-4'%>
+  </div>
+
+  <div class="pure-control-group">
+    <%= label_tag(:localidad, "Localidad:") %>
+    <%= f.text_field :localidad, :placeholder => 'Localidad', :class => 'pure-input-1-4'%>
+    <%= label_tag(:partido, "Partido:") %>
+    <%= f.text_field :partido, :placeholder => 'Partido', :class => 'pure-input-1-4'%>
+  </div>
+
+
+
+<%= field_set_tag 'Otros ..'  %>
+
+  <div class="pure-control-group">
+    <%= label_tag(:tipo, "¿El profesional es externo?") %>
+  <%= f.check_box :tipo %>
+  </div>
+
+  <div class="pure-control-group">
+    <%= label_tag(:comentario, "Comentario:") %>
+    <%= f.text_area  :comentario, :placeholder => 'Comentario', :class => 'pure-input-1-4'%>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Guardar Profesional', :class=>'button-success pure-button' %>
+  </div>
+
+<% end %>

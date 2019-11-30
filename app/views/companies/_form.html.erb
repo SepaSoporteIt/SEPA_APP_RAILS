@@ -1,0 +1,196 @@
+<div>
+    <style scoped>
+        .button-success,
+        .button-error,
+        .button-warning,
+        .button-secondary {
+            color: white;
+            border-radius: 4px;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+        }
+        .button-success {
+            background: rgb(28, 184, 65); /* this is a green */
+        }
+
+    </style>
+</div>
+<%= form_for @company, :html => {:class => 'pure-form pure-form-aligned'} do |f| %>
+<%= field_set_tag 'Por favor complete los siguientes datos basicos'  %>
+
+<!-- Manejo de errores en vista !--> 
+  <% if company.errors.any? %>
+    <div id="error_explanation">
+
+      <% if company.errors.count ==1 %>
+        <h2>Se encontro <%= company.errors.count%> error en la creacion de este cliente</h2>
+      <% else %>
+        <h2>Se encontraron <%= company.errors.count%> errores en la creacion de este cliente</h2>
+        <% end %>    
+        <!-- cambio carteles de error dependiendo de la cantidad de estos mismos !-->
+      <ul>
+        <% company.errors.each do |attr,message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+
+    </div>
+  <% end %>
+  <div class="pure-control-group">
+    <label class="tooltip"><%= link_to "Profesional Asignado*", :controller => 'employees', :action => 'new' %><span class="tooltiptext">Los campos indicados con * son obligatorios </span> </label> 
+
+
+    <%= select("company", "employeeId", Employee.all.collect {|g| [ g.name+" "+g.surname, g.id ] }.sort, {  :prompt => 'Prof. Asignado' } , :class => 'pure-input-1-4')%>
+  </div>
+
+  <div class="pure-control-group">
+    <%= label_tag(:name, "Razon Social:") %>
+    <%= f.text_field :name, :placeholder => 'Razon Social' , :class => 'pure-input-1-4'%>
+    <%= label_tag(:fantasy_name, "Nombre de Fantasia:") %>
+    <%= f.text_field :fantasy_name, :placeholder => 'Nombre de Fantasia' , :class => 'pure-input-1-4'%>
+  </div>
+
+  <div class="pure-control-group">
+    <label class ="tooltip">Cuit*<span class="tooltiptext">Los campos indicados con * son obligatorios </span> </label>  
+    <%= f.text_field :cuit, :placeholder => 'Cuit', :class => 'pure-input-1-4' %>
+    <%= label_tag(:companyType, "Casa Matriz o Sede?:") %>
+    <%= f.select :companyType, ['CASA MATRIZ','SEDE','UNICO'] %>
+  </div>
+  
+<br>
+  <%= field_set_tag 'Por favor complete los campos de contacto'  %>
+</br>
+  <div class="pure-control-group">
+    <%= label_tag(:addressDirection, "Calle") %>
+    <%= f.text_field :addressDirection, :placeholder => 'Calle', :class => 'pure-input-1-4' %>
+    <%= label_tag(:addressNumber, "Número") %>
+    <%= f.text_field :addressNumber, :placeholder => 'Número', :class => 'pure-input-1-4' %>
+  </div>
+
+  <div class="pure-control-group">
+    <%= label_tag(:floor, "Piso:") %>
+    <%= f.text_field :floor, :placeholder => 'Piso', :class => 'pure-input-1-4' %>
+    <%= label_tag(:departament, "Departamento:") %>
+    <%= f.text_field :departament, :placeholder => 'Departamento', :class => 'pure-input-1-4' %>
+  </div!>
+  
+  <div class="pure-control-group">
+    <label>Localidad:</label>
+      <%= select("company", "localidad", LocalidadPartido.all.collect {|e| [ e.localidad, e.id ] }.sort, { :prompt =>'Localidad' } , :class => 'pure-input-1-4')%>
+
+       <label>Partido:</label>
+      <%= select("company", "partido", LocalidadPartido.all.collect {|c| [ c.partido, c.id ] }.sort ,  { :prompt =>'Partido' } , :class => 'pure-input-1-4')%>
+
+
+  </div!>
+  
+<br>
+	<br>
+		<div class="pure-control-group">
+      <%= label_tag(:postal_code, "Codigo postal:") %>
+      <%= f.text_field :postal_code, :placeholder => 'Codigo postal', :class => 'pure-u-1-4  ' %>
+			<%= label_tag(:contact, "Contacto:") %>
+			<%= f.text_field :contact, :placeholder => 'Contacto', :class => 'pure-u-1-4  ' %>
+		</div>
+
+		<div class="pure-control-group">
+			<%= label_tag(:tlf, "Telefono:") %>
+			<%= f.text_field :tlf, :placeholder => 'Telefono', :class => 'pure-u-1-4' %>
+			<%= label_tag(:internal_tlf, "# Interno:") %>
+			<%= f.text_field :internal_tlf, :placeholder => 'Interno', :class => 'pure-u-1-4' %>
+		</div>
+
+		<div class="pure-control-group">
+			<%= label_tag(:cellphone, "Celular:") %>
+			<%= f.text_field :cellphone, :placeholder => 'Celular', :class => 'pure-u-1-4' %>
+		</div>
+  
+		<div class="pure-control-group">
+			<%= label_tag(:email, "Correo:") %>
+			<%= f.text_field :email, :placeholder => 'E-mail', :class => 'pure-input-2-3' %>
+		</div>
+	</br>
+</br>
+
+  <div class="pure-control-group">
+    <label><%= link_to "Rubro/Actividad", :controller => 'industry_types', :action => 'index' %></label>
+  </div>
+  <div><b><label>AFIP</label></b>
+  </div>
+  <div class="pure-control-group">
+
+    <label class="tooltip">1° CIIU<span class="tooltiptext">Los campos indicados con * son obligatorios </span> </label> 
+
+    <%= select("company", "industryTypeId", IndustryType.all.collect {|e| [ e.ciiu+" - "+ e.name ] }, { :prompt => 'CIIU' } , :class => 'pure-input-1-4') %>
+
+ 
+
+ </div>
+
+  <div class="pure-control-group">
+    <label class="tooltip">2° CIIU</label> 
+
+    <%= select("company", "industryTypeId2", IndustryType.all.collect {|e| [ e.ciiu+" - "+ e.name ] }, { :prompt => 'CIIU' } , :class => 'pure-input-1-4')%>
+  </div>
+
+
+<br>
+  <b><%= field_set_tag 'HABILITACION ESTABLECIMIENTOS / OTROS'  %></b>
+</br>
+
+     <div class="pure-control-group">
+      <%= label_tag(:habpri, "Primaria") %>
+      <%= f.text_field :habpri, :placeholder => 'Habilitacion Primaria', :class => 'pure-input-2-3' %>
+    </div>
+
+
+     <div class="pure-control-group">
+            <%= label_tag(:habsec, "Secundaria") %>
+      <%= f.text_field :habsec, :placeholder => 'Habilitacion Secundaria', :class => 'pure-input-2-3' %>
+    </div>
+
+  </br>
+  <%= field_set_tag 'Visitas'  %>
+  </br>
+  <div class="pure-control-group">
+      <%= label_tag(:visitqty_min, "Cantidad mínima de visitas:") %>
+      <%= f.text_field :visitqty_min, :placeholder => 'Min', :class => 'pure-u-1-4' %>
+      <%= label_tag(:visitqty_max, "Cantidad máxima de visitas:") %>
+      <%= f.text_field :visitqty_max, :placeholder => 'Max', :class => 'pure-u-1-4' %>
+  </div>
+  
+  <div class="pure-control-group">
+    <%= label_tag(:suscription, "Servicio HYS?") %>
+	<%= f.check_box :suscription %>
+  </div>
+</br>
+
+<!--h2>Tareas/Permanencia</h2>
+  <div class="pure-form pure-form-aligned">
+    <%= f.nested_fields_for :visit, legend: "Complete los datos de la Tarea/Permanencia" do |ff| %>
+      <div class="pure-control-group">
+        <%= label_tag(:visitTypeId, "Tarea:") %>
+        <%= ff.select :visitTypeId, options_for_select(VisitType.all.collect {|e| [ e.name, e.id ]}, ff.object.visitTypeId), :include_blank => "Tipo de Tarea", :class => 'pure-input-1-3'%>
+      </div>
+      <div class="pure-control-group">
+        <%= label_tag(:frecuencyTypeId, "Tipo de Frecuencia:") %>
+        <%= ff.select :frecuencyTypeId, options_for_select(Frecuency.all.collect {|e| [ e.name, e.id ]}, ff.object.frecuencyTypeId), :include_blank => "Frecuencia de Tarea" , :class => 'pure-input-1-3'%>
+        <%= label_tag(:employeeId, "Responsable:") %>
+        <%= ff.select :employeeId, options_for_select(Employee.all.collect {|e| [ e.name, e.id ]}, ff.object.employeeId), :include_blank => "Realizador de la Tarea" , :class => 'pure-input-1-3'%>
+      </div>
+      <div class="pure-control-group">
+        <%= label_tag(:visitDate, "Fecha de la Visita:") %>
+        <%= ff.date_select :visitDate , :class => 'pure-input-1-3', order: [:day, :month, :year] %>
+      </div>
+      <%= ff.remove_nested_fields_link 'Eliminar esta Tarea', class: 'button-error pure-button',role: 'button'%>
+  <% end %>
+  </div>
+  <div class="action">
+    <%= f.add_nested_fields_link :visit,'Agregar', class: 'button-secondary pure-button'%>
+  </div>
+  <hr/>
+  <br/-->
+
+  <div class="action">
+    <%= f.submit 'Guardar Cliente', :class=>'button-success pure-button' %>
+  </div>
+<% end %>

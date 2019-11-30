@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+
+<button class="pure-button pure-button-active"><%= link_to 'Editar', edit_expiration_path(@expiration) %></button> &nbsp; | &nbsp; <button class="pure-button pure-button-active"><%= link_to 'Regresar a Vencimientos', "/expirations" %></button> &nbsp; | &nbsp; <button class="pure-button pure-button-active"><%= link_to 'Regresar al Cliente', @expiration.company %></button> &nbsp; | &nbsp; <button class="pure-button pure-button-active"><%= link_to 'Eliminar', @expiration, method:  :delete, data: { confirm: 'Esta Ud Seguro?' } %></button>
+
+</br></br>
+<style> .example-table td {   padding: 3px} </style>
+<table width="100%" class="pure-table pure-table-horizontal" >
+<thead> <tr> <th><strong><em>Info general</em></strong></th></tr></thead>
+<tbody>
+  <tr>
+  <tr><td><strong>Cliente: </strong><%= link_to @expiration.company.name + " - " + @expiration.company.addressDirection + " " + @expiration.company.addressNumber, @expiration.company%></td> </tr> 
+    <tr class="pure-table-odd">
+      <td><strong>Profesional:</strong>            <%= @expiration.employee.name + " " + @expiration.employee.surname%></td></tr>
+  <tr><td><strong>Estudio:</strong>           <%= @expiration.study.name %></td></tr>
+</tbody>
+</table>
+
+
+<style> .example-table td {   padding: 3px} </style>
+<table width="100%" class="pure-table pure-table-horizontal" >
+<thead> <tr> <th><strong><em>Fechas</em></strong></th></tr></thead>
+<tbody>
+
+  <tr><td><strong>Fecha de Inicio:</strong>             <%= @expiration.start_date %></td></tr>
+  <tr><td><strong>Fecha de Finalizacion:</strong>            <%= @expiration.end_date %></td></tr>
+  <tr class="pure-table-odd">
+      <td><strong>Estado:</strong>       <%= @expiration.status %></td>
+  </tr>
+</tbody>
+</table>
+</table>
+  <dl><strong>Comentario:</strong>              <%= @expiration.comments %></dl>

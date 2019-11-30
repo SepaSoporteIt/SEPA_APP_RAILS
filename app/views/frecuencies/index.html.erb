@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Frecuencias</h1>
+<%= link_to 'Nueva Frecuencias', new_frecuency_path %>
+<table class="pure-table pure-table-horizontal">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Dias equivalentes</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @frecuencies.each do |frecuency| %>
+      <tr>
+        <td><%= frecuency.name %></td>
+        <td><%= frecuency.days %></td>
+        <td><%= link_to 'Ver Detalles', frecuency %></td>
+        <td><%= link_to 'Editar', edit_frecuency_path(frecuency) %></td>
+        <td><%= link_to 'Eliminar', frecuency, method: :delete, data: { confirm: 'Esta Ud Seguro?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

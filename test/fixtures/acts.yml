@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  entity: one
+  company: one
+  study: one
+  due_date: 2019-06-08
+  comments: MyText
+
+two:
+  entity: two
+  company: two
+  study: two
+  due_date: 2019-06-08
+  comments: MyText

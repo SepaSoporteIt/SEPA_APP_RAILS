@@ -1,0 +1,2 @@
+class Ambito < ApplicationRecord
+end

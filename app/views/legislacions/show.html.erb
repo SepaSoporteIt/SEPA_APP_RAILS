@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @legislacion.name %>
+</p>
+
+<%= link_to 'Editar', edit_legislacion_path(@legislacion) %> |
+<%= link_to 'Regresar al Listado', legislacions_path %>

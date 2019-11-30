@@ -1,0 +1,89 @@
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="/tablefilter.js"></script>
+<script src="/datatables.min.js"></script>
+
+<script>
+  $( document ).ready(function() {
+    $('#table1').tableFilter({
+
+      // input field to filter table rows
+      'input' : 'input[type=search]',
+
+      // trigger events and elements
+      'trigger': {
+        
+        "event"   : "keyup", 
+        'element'   : undefined 
+      },
+
+      // case sensitive
+      'caseSensitive' :  false,
+      
+      // enable table sort
+      'sort'  : true, 
+
+      // not found element
+      // e.g. notFoundElement : ".not-found"
+      'notFoundElement' : null,
+
+    });
+  });  
+$(document).ready( function() {
+  $('#table1').dataTable( {
+    "iDisplayLength": 50,
+      "searching": false,
+        "lengthMenu": [[50, 75, 100, -1], [50, 75, 100, "Todas"]],
+        "pagingType": "numbers"
+      } );
+} )
+
+</script>
+<p id="notice"><%= notice %></p>
+
+<h1>CLIENTES</h1>
+
+		<button class="pure-button pure-button-active"><%= link_to 'Nuevo Cliente', new_company_path %></button>
+</br>
+
+<br>
+			<%= form_tag(companies_path, method: :get) do %>
+  			<%= text_field_tag :search, params[:search] %>
+  			<%= submit_tag 'Buscar', name: nil %>
+  			&nbsp; &nbsp; <%= "Puede buscar por Razón Social, Nombre de fantasia o Localidad" %>
+			<% end %>
+</br>
+
+		<table frame="vsides" class="pure-table pure-table-horizontal" id="table1">
+		<thead>
+			<tr style="vertical-align: middle">
+			<th align="center" class="menu-sticky">Razon Social</th>
+			<th align="center" class="menu-sticky">Nombre de Fantasia</th>
+			<th align="center" class="menu-sticky">Telefono </th>
+			<th align="center" class="menu-sticky">Dirección</th>
+			<th align="center" class="menu-sticky">Localidad </th>
+			<th align="center" class="menu-sticky">Partido </th>
+			<th align="center" class="menu-sticky">Servicio HYS </th>
+			<th align="center" class="menu-sticky">Acciones</th>			
+	<!--    <th colspan="2",  align="center">Acciones</th> lo saco para que quede la tabla con el bord derecho mientras vemos lo de eliminar    !-->
+			
+			</tr>
+		</thead>
+	
+  <tbody>
+    <% @companies.each do |company| %>
+      <tr>
+        <td align="center"><%= link_to company.name, company%></td>
+        <td align="center"><%= company.fantasy_name %></td>
+        <td align="center"><%= company.tlf %></td>
+        <td align="center"><%= company.addressDirection+" "+company.addressNumber %></td>
+        <td align="center"><%= company.localidad_partido.localidad %></td>
+        <td align="center"><%= company.localidad_partido.partido %></td>
+        <td align="center"><%= company.suscription ? 'Si':'No'%></td>    
+        <td align="right"><%= link_to 'Editar', edit_company_path(company) %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

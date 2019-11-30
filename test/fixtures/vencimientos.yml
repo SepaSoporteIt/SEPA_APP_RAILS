@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  company: one
+  employee: one
+  study: one
+  date: 
+  date: 
+  string: 
+  text: 
+
+two:
+  company: two
+  employee: two
+  study: two
+  date: 
+  date: 
+  string: 
+  text: 

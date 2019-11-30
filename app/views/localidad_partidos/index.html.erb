@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Localidades y Partidos</h1>
+
+<%= link_to 'Nueva Localidad y Partido', new_localidad_partido_path %>
+
+
+
+</br></br>
+
+<table class="pure-table pure-table-horizontal">
+  <thead>
+    <tr>
+      <th>Localidad</th>
+      <th>Partido</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @localidad_partidos.each do |localidad_partido| %>
+      <tr>
+        <td><%= localidad_partido.localidad %></td>
+        <td><%= localidad_partido.partido %></td>
+        <td><%= link_to 'Destalles', localidad_partido %></td>
+        <td><%= link_to 'Editar', edit_localidad_partido_path(localidad_partido) %></td>
+        <td><%= link_to 'Eliminar', localidad_partido, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

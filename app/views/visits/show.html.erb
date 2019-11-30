@@ -1,0 +1,91 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <h1> <%= @visit.visitType.name %> </h1>
+  <%= link_to 'Editar/Agregar Dcoumento', edit_visit_path(@visit) %> |
+  <%= link_to 'Regresar al Listado', visits_path %>
+</p>
+
+<style> .example-table td {   padding: 3px} </style>
+
+<table width="100%" class="example-table" border="0">
+<tbody>
+    <tr>
+        <td><strong>Id de la Tarea:</strong></td>
+        <td><%= @visit.id %></td>
+        <td><strong>Codigo de la Tarea:</strong></td>
+        <td><%= @visit.external_id %></td>
+    </tr>
+    <tr>
+        <td><strong>Cliente:</strong></td>
+        <td><%= @visit.company.name %></td>
+        <td><strong>Vencimiento:</strong></td>
+        <td><%= @visit.visitDate %></td>
+    </tr>
+    <tr>
+      <td><strong>Estado:</strong></td>
+      <td><%= @visit.state %></td>
+      <td><strong>Responsable:</strong></td>
+      <td><%= @visit.employee.name %></td>
+    </tr>
+    <tr>
+      <td><strong>Ultima Actualizacion:</strong></td>
+      <td><%= @visit.updated_at %></td>
+      <td><strong>Aprobado:</strong></td>
+      <td><%= @visit.aproved ? 'Si':'No'%></td>
+    </tr>
+    <tr>
+      <td><strong>Fecha de Envio de presupuesto:</strong></td>
+      <td><%= @visit.budget_sent_date %></td>
+      <td><strong>Fecha de Aprovacion de presupuesto:</strong></td>
+      <td><%= @visit.aproval_budget_date %></td>
+    </tr>
+    <tr>
+      <td><strong>Observacion:</strong></td>
+      <td><%= @visit.observation %></td>
+    </tr>
+</table>
+<br/>
+
+<h3>Documentos</h3>
+
+<table class="pure-table pure-table-horizontal">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @visit.document.each do |document| %>
+      <tr>
+        <td><%= document.name %></td>
+        <td><%= link_to 'Descargar', document.images.url(:original, false) %></td>
+        <td><%= link_to 'Editar', edit_document_path(document) %></td>
+        <td><%= link_to 'Eliminar', document, method: :delete, data: { confirm: 'Esta Ud Seguro?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h3>Comentarios</h3>
+<%= link_to 'Agregar Comentario', new_visit_comment_path(@visit) %>
+<table class="pure-table pure-table-horizontal" width="100%">
+  <thead>
+    <tr>
+      <th width="20%">Fecha de Creacion</th>
+      <th>Comentario</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @visit.visit_comment.each do |comment| %>
+      <tr>
+        <td><%= comment.created_at %></td>
+        <td><%= comment.note %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

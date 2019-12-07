@@ -14,7 +14,8 @@ def self.search(term)
   if term
   	where('name LIKE ? '\
     'OR surname LIKE ? '\
-    'OR mat_number LIKE ?', "%#{term}%", "%#{term}%", "#{term}")
+    'OR status LIKE ? '\
+    'OR mat_number LIKE ?', "%#{term}%", "%#{term}%", "%#{term}%", "#{term}")
   else
   	all
   end

@@ -19,10 +19,21 @@
 <thead> <tr> <th><strong><em>Info general</em></strong></th></tr></thead>
 <tbody>
   <tr>
-  <tr><td><strong>Cliente: </strong><%= link_to @expiration.company.name + " - " + @expiration.company.addressDirection + " " + @expiration.company.addressNumber, @expiration.company%></td> </tr> 
+  <tr><td><strong>Cliente: </strong>
+    <%= @expiration.company.name + " - " + @expiration.company.addressDirection + " " + @expiration.company.addressNumber%>
+    <button class="pure-button pure-button" style="float: right"><%= link_to 'Ir', @expiration.company %></button> 
+
+  </td></tr> 
+  
     <tr class="pure-table-odd">
-      <td><strong>Profesional:</strong><%= @expiration.employee.name + " " + @expiration.employee.surname%></td></tr>
-  <tr><td><strong>Estudio:</strong><%= @expiration.study.name %></td></tr>
+    <td><strong>Profesional: </strong>
+      <%=@expiration.employee.name + " " + @expiration.employee.surname %>
+      <button class="pure-button pure-button" style="float: right"><%= link_to 'Ir', @expiration.employee %></button> 
+</td></tr>
+
+  <tr><td><strong>Estudio:</strong><%= @expiration.study.name %>
+
+ </td></tr>
 </tbody>
 </table>
 

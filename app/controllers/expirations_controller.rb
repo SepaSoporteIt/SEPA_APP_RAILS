@@ -38,15 +38,20 @@ class ExpirationsController < ApplicationController
     @expiration = Expiration.new(expiration_params)
 
     respond_to do |format|
-      if @expiration.save
+      if params[:seguir]
+        @expiration.save
+        format.html { redirect_to new_expiration_path , notice: 'VENCIMIENTO GUARDADO CON EXITO'}
+      elsif params[:guardar]
+        @expiration.save
         format.html { redirect_to @expiration, notice: 'Vencimiento creado con exito.' }
         format.json { render :show, status: :created, location: @expiration }
       else
-        format.html { render :new }
+        format.html { render :new, notice: 'error'}
         format.json { render json: @expiration.errors, status: :unprocessable_entity }
       end
+
+      end
     end
-  end
 
   # PATCH/PUT /expirations/1
   # PATCH/PUT /expirations/1.json
@@ -67,11 +72,16 @@ class ExpirationsController < ApplicationController
   def destroy
     @expiration.destroy
     respond_to do |format|
-      format.html { redirect_to expirations_url, notice: 'Vencimiento eliminado con exito.' }
+    if params[:from]=='prof'
+      format.html { redirect_to employees_url, notice: 'Vencimiento eliminado con exito.' }
+    elsif params[:from]=='comp'
+      format.html { redirect_to companies_url, notice: 'Vencimiento eliminado con exito no prof.' }
+    else
+      format.html { redirect_to expirations_url, notice: 'Vencimiento eliminado con exito no prof.' }      
+    end
       format.json { head :no_content }
     end
   end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_expiration
@@ -80,6 +90,6 @@ class ExpirationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def expiration_params
-      params.require(:expiration).permit(:companyId, :employeeId, :studyId, :start_date, :end_date, :status, :comments, :search)
+      params.require(:expiration).permit(:companyId, :employeeId, :studyId, :start_date, :end_date, :status, :comments, :search, :codigounico)
     end
 end

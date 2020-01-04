@@ -45,6 +45,7 @@ if (document.getElementById("expiration_status").value == "Vigente Sin fecha") {
 
 </script>
 
+<p id="notice"><%= notice %></p>
 
 <%= form_for @expiration, :html => {:class => 'pure-form pure-form-aligned'} do |f| %>
 <%= field_set_tag 'Por favor complete los siguientes campos'  %>
@@ -98,11 +99,12 @@ if (document.getElementById("expiration_status").value == "Vigente Sin fecha") {
 
   <div class="pure-control-group">
     <%= label_tag :comments,"Comentarios" %>
-    <%= f.text_area :comments, :placeholder => 'Comentarios' %>
+    <%= f.text_area :comments, cols: "50", rows: "5",  :placeholder => 'Comentarios' %>
   </div>
 
-  <div class="action">
-    <%= f.submit 'Guardar vencimiento', :class=>'button-success pure-button' %>
+  <div class="pure-control-group">
+    <%= submit_tag 'Guardar', name: "guardar",  :class=>'button-success pure-button'  %>
+    <%= submit_tag 'Guardar y seguir cargando', name: "seguir",  :class=>'button-success pure-button' %> 
   </div>
 
 <% end %>

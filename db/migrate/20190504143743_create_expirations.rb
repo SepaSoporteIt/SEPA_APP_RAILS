@@ -8,6 +8,7 @@ class CreateExpirations < ActiveRecord::Migration[5.0]
       t.date :end_date
       t.string :status
       t.text :comments
+      t.text :codigounico
 
       t.timestamps
     end

@@ -1,3 +1,46 @@
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="/tablefilter.js"></script>
+<script src="/datatables.min.js"></script>
+
+
+<script>
+  $( document ).ready(function() {
+    $('#table1').tableFilter({
+
+      // input field to filter table rows
+      'input' : 'input[type=search]',
+
+      // trigger events and elements
+      'trigger': {
+        
+        "event"   : "keyup", 
+        'element'   : undefined 
+      },
+
+      // case sensitive
+      'caseSensitive' :  false,
+      
+      // enable table sort
+      'sort'  : true, 
+
+      // not found element
+      // e.g. notFoundElement : ".not-found"
+      'notFoundElement' : null,
+
+    });
+  });  
+$(document).ready( function() {
+  $('#table1').dataTable( {
+    "iDisplayLength": 50,
+      "searching": false, 
+        "lengthMenu": [[50, 75, 100, -1], [50, 75, 100, "Todos"]],
+        "pagingType": "numbers"
+      } );
+} )
+
+
+</script>
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -134,7 +177,11 @@
 <button class="pure-button pure-button-active"><%= link_to 'Nuevo Vencimiento', new_expiration_path %></button>
 </br>
 </br>
-<table class="pure-table pure-table-horizontal">
+
+<input type="search" placeholder="Filtrar ...">  <%= "Puede buscar por Cliente, Profesional y Estudio" %>
+</br>
+</br>
+<table class="pure-table pure-table-horizontal", id="table1">
   <thead>
     <tr style="vertical-align: middle">
       <th align="center">Profesional</th>
@@ -160,7 +207,7 @@
           <td align="center"><%= expiration.status %></td>
           <td><%= link_to 'Ver Detalles', expiration %></td>
           <td><%= link_to 'Editar', edit_expiration_path(expiration) %></td>
-          <td><%= link_to 'Eliminar', expiration, method: :delete, data: { confirm: 'Esta Ud Seguro?' } %></td>
+          <td><%= link_to 'Borrar', expiration_path(expiration, :from=>"comp"), :method=>:delete %></td>
         </tr>
         <%end%>
     <% end %>

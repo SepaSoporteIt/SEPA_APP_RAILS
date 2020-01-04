@@ -34,6 +34,7 @@ $(document).ready( function() {
       "searching": false,
         "lengthMenu": [[50, 75, 100, -1], [50, 75, 100, "Todas"]],
         "pagingType": "numbers"
+        
       } );
 } )
 
@@ -43,14 +44,12 @@ $(document).ready( function() {
 <h1>CLIENTES</h1>
 
 		<button class="pure-button pure-button-active"><%= link_to 'Nuevo Cliente', new_company_path %></button>
+    </br>
+</br>
+<input type="search" placeholder="Filtrar ...">  <%= "Puede buscar por Cliente, Profesional y Estudio" %>
+
 </br>
 
-<br>
-			<%= form_tag(companies_path, method: :get) do %>
-  			<%= text_field_tag :search, params[:search] %>
-  			<%= submit_tag 'Buscar', name: nil %>
-  			&nbsp; &nbsp; <%= "Puede buscar por Razón Social, Nombre de fantasia o Localidad" %>
-			<% end %>
 </br>
 
 		<table frame="vsides" class="pure-table pure-table-horizontal" id="table1">

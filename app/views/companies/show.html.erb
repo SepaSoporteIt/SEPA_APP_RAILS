@@ -207,7 +207,7 @@ $(document).ready( function() {
           <td align="center"><%= expiration.status %></td>
           <td><%= link_to 'Ver Detalles', expiration %></td>
           <td><%= link_to 'Editar', edit_expiration_path(expiration) %></td>
-          <td><%= link_to 'Eliminar', expiration, method: :delete, data: { confirm: 'Esta Ud Seguro?' } %></td>
+          <td><%= link_to 'Borrar', expiration_path(expiration, :from=>"comp"), :method=>:delete %></td>
         </tr>
         <%end%>
     <% end %>

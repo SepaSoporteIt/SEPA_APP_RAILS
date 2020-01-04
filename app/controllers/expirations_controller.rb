@@ -72,14 +72,16 @@ class ExpirationsController < ApplicationController
   def destroy
     @expiration.destroy
     respond_to do |format|
-      if params[:personal]
+    if params[:from]=='prof'
       format.html { redirect_to employees_url, notice: 'Vencimiento eliminado con exito.' }
-      else
-      format.html { redirect_to expirations_url, notice: 'Vencimiento eliminado con exito.' }
+    elsif params[:from]=='comp'
+      format.html { redirect_to companies_url, notice: 'Vencimiento eliminado con exito no prof.' }
+    else
+      format.html { redirect_to expirations_url, notice: 'Vencimiento eliminado con exito no prof.' }      
+    end
       format.json { head :no_content }
     end
   end
-end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_expiration
@@ -88,6 +90,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def expiration_params
-      params.require(:expiration).permit(:companyId, :employeeId, :studyId, :start_date, :end_date, :status, :comments, :search)
+      params.require(:expiration).permit(:companyId, :employeeId, :studyId, :start_date, :end_date, :status, :comments, :search, :codigounico)
     end
 end

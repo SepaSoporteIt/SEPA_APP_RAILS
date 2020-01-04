@@ -271,6 +271,7 @@ ActiveRecord::Schema.define(version: 20190425192839) do
       t.date "end_date"
       t.string "status"
       t.text "comments"
+      t.integer "codigounico"
   end
   
   create_table "localidad_partidos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
